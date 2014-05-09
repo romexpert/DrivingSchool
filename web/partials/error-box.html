@@ -1,0 +1,14 @@
+<div class="container-fluid">
+    <div class="row" ng-cloak ng-show="errorFactory.count()">
+        <div class="col-sm-12">
+            <div class="alert alert-danger" style="margin:15px 0;">
+                <b>Ошибка</B>
+                <b ng-show="errorFactory.count() > 1">#{{errorFactory.count()}}</b>
+                <button type="button" class="close" ng-click="errorFactory.removeLastError()">&times;</button>
+                <div ng-repeat="errorLine in errorFactory.errorLinesForDisplay() track by $index">
+                    {{errorLine}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
