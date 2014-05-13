@@ -13,6 +13,16 @@
     );
     
     schoolFactories.factory(
+        'lectures'
+        , [
+            '$resource'
+            , function($resource){
+                return $resource('LecturesApi');
+            }
+        ]
+    );
+    
+    schoolFactories.factory(
         'errorFactory'
         , function () {
             var container = [];

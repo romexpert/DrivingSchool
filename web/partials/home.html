@@ -21,20 +21,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Первая лекция</td>
-                                <td>Пройдена</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Вторая лекция</td>
-                                <td>Пройдена</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Третья лекция</td>
-                                <td>Не пройдена</td>
+                            <tr ng-repeat="lecture in lectures">
+                                <td>{{lecture.number}}</td>
+                                <td>{{lecture.name}}</td>
+                                <td>{{lecture.status}}</td>
                             </tr>
                         </tbody>
                     </table>

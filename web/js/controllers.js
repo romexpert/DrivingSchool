@@ -25,8 +25,10 @@
         'HomeCtrl'
         , [
             '$scope'
-            , function($scope) {
+            , 'lectures'
+            , function($scope, lectures) {
                 $scope.Hello = 'Hoo yeah!';
+                $scope.lectures = lectures.query();
             }
         ]
     );
