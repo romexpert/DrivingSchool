@@ -24,7 +24,7 @@
                             <tr ng-repeat="lecture in lectures">
                                 <td>{{lecture.number}}</td>
                                 <td>{{lecture.name}}</td>
-                                <td>{{lecture.status}}</td>
+                                <td><span class="glyphicon" ng-class="{'glyphicon-ok': lecture.status === 'Пройдена', 'glyphicon-remove': lecture.status !== 'Пройдена'}"></span> {{lecture.status}}</td>
                             </tr>
                         </tbody>
                     </table>
