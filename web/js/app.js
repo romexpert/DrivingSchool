@@ -23,6 +23,20 @@
                 )
                 .otherwise({
                     redirectTo: '/logon'
+                });
+        }
+    ]);
+    
+    school.run([
+        '$rootScope'
+        , '$location'
+        , 'currentUser'
+        , function($rootScope, $location, currentUser){
+            $rootScope.$on(
+                '$routeChangeStart'
+                , function(){
+                    if(!currentUser.isAuthorized && $location.$$path && $location.$$path !== '/logon')
+                        $location.path('/logon');
                 })
         }
     ]);

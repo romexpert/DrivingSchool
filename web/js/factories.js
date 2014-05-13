@@ -41,13 +41,16 @@
         , function () {
             var currentUser = {
                 role: null
+                , isAuthorized: false
                 
                 , set: function(name, role){
                     this.name = name;
                     this.role = role;
+                    this.isAuthorized = true;
                 }
                 , reset: function(){
                     this.set(null, null);
+                    this.isAuthorized = false;
                 }
             };
             
