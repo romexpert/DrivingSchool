@@ -4,9 +4,17 @@
         <servlet-name>LogonApi</servlet-name>
         <servlet-class>LogonApi</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LecturesApi</servlet-name>
+        <servlet-class>LecturesApi</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LogonApi</servlet-name>
         <url-pattern>/LogonApi</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LecturesApi</servlet-name>
+        <url-pattern>/LecturesApi</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
