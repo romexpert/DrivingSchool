@@ -28,7 +28,9 @@
                                         {{lecture.name}}
                                     </a>
                                 </td>
-                                <td><span class="glyphicon" ng-class="{'glyphicon-ok': lecture.status === 'Пройдена', 'glyphicon-remove': lecture.status !== 'Пройдена'}"></span> {{lecture.status}}</td>
+                                <td>
+                                    <span class="glyphicon" ng-class="{'glyphicon-ok': lecture.status === 'Пройдена', 'glyphicon-remove': lecture.status !== 'Пройдена'}"></span> {{lecture.status}}
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -49,7 +51,9 @@
                                 <td>
                                     {{exercise.datetime | date:'d.MM.yyyy HH:mm'}}
                                 </td>
-                                <td><span class="glyphicon" ng-class="{'glyphicon-ok': exercise.status === 'Пройдено', 'glyphicon-remove': exercise.status !== 'Пройдено'}"></span> {{exercise.status}}</td>
+                                <td>
+                                    <span class="glyphicon" ng-class="{'glyphicon-ok': exercise.status === 'Пройдено', 'glyphicon-remove': exercise.status !== 'Пройдено'}"></span> {{exercise.status}}
+                                </td>
                             </tr>
                         </tbody>
                     </table>
