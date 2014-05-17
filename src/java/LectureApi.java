@@ -10,7 +10,7 @@ import org.json.simple.*;
  *
  * @author admin
  */
-public class LecturesApi extends HttpServlet {
+public class LectureApi extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -18,7 +18,7 @@ public class LecturesApi extends HttpServlet {
         response.setContentType("application/json; charset=utf-8");
         //TODO
         
-        ArrayList<Lecture> lectures = new ArrayList<Lecture>();
+        ArrayList<Lecture> lectures = new ArrayList<>();
         lectures.add(new Lecture(1, "Первая лекция", "Пройдена"));
         lectures.add(new Lecture(2, "Вторая лекция", "Пройдена"));
         lectures.add(new Lecture(3, "Третья лекция", "Не пройдена"));

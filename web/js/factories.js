@@ -17,7 +17,17 @@
         , [
             '$resource'
             , function($resource){
-                return $resource('LecturesApi');
+                return $resource('LectureApi');
+            }
+        ]
+    );
+    
+    schoolFactories.factory(
+        'exercises'
+        , [
+            '$resource'
+            , function($resource){
+                return $resource('ExerciseApi');
             }
         ]
     );

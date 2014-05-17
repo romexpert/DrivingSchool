@@ -4,8 +4,8 @@
             <!-- Nav tabs -->
             <ul class="nav nav-tabs">
                 <li class="active"><a href="" data-target="#home" data-toggle="tab">Теория</a></li>
-                <li><a href="" data-target="#profile" data-toggle="tab">Практика</a></li>
-                <li><a href="" data-target="#messages" data-toggle="tab">Экзамен</a></li>
+                <li><a href="" data-target="#exercises" data-toggle="tab">Практика</a></li>
+                <li><a href="" data-target="#exam" data-toggle="tab">Экзамен</a></li>
             </ul>
 
             <!-- Tab panes -->
@@ -23,14 +23,40 @@
                         <tbody>
                             <tr ng-repeat="lecture in lectures">
                                 <td>{{lecture.number}}</td>
-                                <td>{{lecture.name}}</td>
+                                <td>
+                                    <a href="" ng-click="readLecture(lecture.number)">
+                                        {{lecture.name}}
+                                    </a>
+                                </td>
                                 <td><span class="glyphicon" ng-class="{'glyphicon-ok': lecture.status === 'Пройдена', 'glyphicon-remove': lecture.status !== 'Пройдена'}"></span> {{lecture.status}}</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                <div class="tab-pane" id="profile">Практика tab</div>
-                <div class="tab-pane" id="messages">Экзамен tab</div>
+                <div class="tab-pane" id="exercises">
+                    <h2>Практические занятия</h2>
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>№</th>
+                                <th>Дата</th>
+                                <th>Статус</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="exercise in exercises">
+                                <td>{{exercise.number}}</td>
+                                <td>
+                                    {{exercise.datetime | date:'d.MM.yyyy HH:mm'}}
+                                </td>
+                                <td><span class="glyphicon" ng-class="{'glyphicon-ok': exercise.status === 'Пройдено', 'glyphicon-remove': exercise.status !== 'Пройдено'}"></span> {{exercise.status}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tab-pane" id="exam">
+                    <h2>Экзамен</h2>
+                </div>
             </div>
         </div>
     </div>

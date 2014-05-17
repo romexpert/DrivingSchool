@@ -5,16 +5,24 @@
         <servlet-class>LogonApi</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>LecturesApi</servlet-name>
-        <servlet-class>LecturesApi</servlet-class>
+        <servlet-name>LectureApi</servlet-name>
+        <servlet-class>LectureApi</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ExerciseApi</servlet-name>
+        <servlet-class>ExerciseApi</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LogonApi</servlet-name>
         <url-pattern>/LogonApi</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>LecturesApi</servlet-name>
-        <url-pattern>/LecturesApi</url-pattern>
+        <servlet-name>LectureApi</servlet-name>
+        <url-pattern>/LectureApi</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ExerciseApi</servlet-name>
+        <url-pattern>/ExerciseApi</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

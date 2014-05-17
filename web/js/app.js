@@ -15,6 +15,14 @@
                     }
                 )
                 .when(
+                    '/lecture:number'
+                    , {
+                        templateUrl: function(params){
+                            return 'partials/lectures/lecture' + params.number + '.html';
+                        }
+                    }
+                )
+                .when(
                     '/logon'
                     , {
                         templateUrl: 'partials/logon.html'
