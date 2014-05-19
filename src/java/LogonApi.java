@@ -26,7 +26,14 @@ public class LogonApi extends HttpServlet {
             throw new IOException("Error parsing JSON request string" + ex.toString());
         }
         
-        Account account = Account.login(email, password);
+        Account account = null;
+        try {
+            account = Account.login(email, password);
+        }
+        catch (Exception ex) {
+            throw new ServletException(ex);
+        }
+        
         if(account == null){
             response.sendError(HttpServletResponse.SC_FORBIDDEN);
             return;
