@@ -47,7 +47,28 @@
             , 'currentUser'
             , 'errorFactory'
             , function($scope, $location, logon, currentUser, errorFactory) {
-                $scope.credentials = { email: 'ex@ex.ru', password: 'ex@ex.ru' };
+                $scope.credentials = { email: 'student@driftman.ru', password: 'student123' };
+                
+                var credentials = {
+                    currentCredIndex: 0
+                    , credArray: [
+                        { email: 'student@driftman.ru', password: 'student123' }
+                        , { email: 'teacher@driftman.ru', password: 'teacher123' }
+                        , { email: 'admin@driftman.ru', password: 'admin123' }
+                    ]
+                    , nextCredentials: function(){
+                        if(++this.currentCredIndex >= this.credArray.length)
+                            this.currentCredIndex = 0;
+                        return this.credArray[this.currentCredIndex];
+                    }
+                }
+                
+                $scope.changeCredentials = function(e){
+                    if(e.shiftKey && e.keyCode === 38){
+                        e.preventDefault();
+                        $scope.credentials = credentials.nextCredentials();
+                    }
+                }
                 
                 $scope.login = function(){
                     logon

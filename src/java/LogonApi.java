@@ -12,7 +12,7 @@ import org.json.simple.*;
  * @author admin
  */
 public class LogonApi extends HttpServlet {
-
+    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -23,39 +23,25 @@ public class LogonApi extends HttpServlet {
             email = json.get("email").toString();
             password = json.get("password").toString();
         } catch(Exception ex) {
-            // crash and burn
             throw new IOException("Error parsing JSON request string" + ex.toString());
         }
         
-        UUID sessionId = logonUser(email, password);
-        if(sessionId == null){
+        Account account = Account.login(email, password);
+        if(account == null){
             response.sendError(HttpServletResponse.SC_FORBIDDEN);
             return;
         }
-        Cookie sessionCookie = new Cookie("sessionId", sessionId.toString());
+        Cookie sessionCookie = new Cookie("sessionId", account.getSessionId().toString());
         sessionCookie.setHttpOnly(true);
         response.addCookie(sessionCookie);
         
         response.setContentType("application/json; charset=utf-8");
         JSONObject data = new JSONObject();
-        //TODO
-        data.put("name", "Андрюша");
-        data.put("role", "student");
+        
+        data.put("name", account.getName());
+        data.put("role", account.getRole().toString());
 
         data.writeJSONString(response.getWriter());
-    }
-    
-    UUID logonUser(String email, String password)
-    {
-        //if(email == null || password == null)
-        //    return false;
-        if("ex@ex.ru".equals(email) && "ex@ex.ru".equals(password)){
-            UUID sessionId = UUID.randomUUID();
-            //TODO: save sessionId;
-            return sessionId;
-        }
-        
-        return null;
     }
     
 }
