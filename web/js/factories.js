@@ -58,24 +58,37 @@
     
     schoolFactories.factory(
         'currentUser'
-        , function () {
-            var currentUser = {
-                role: null
-                , isAuthorized: false
-                
-                , set: function(name, role){
-                    this.name = name;
-                    this.role = role;
-                    this.isAuthorized = true;
-                }
-                , reset: function(){
-                    this.set(null, null);
-                    this.isAuthorized = false;
-                }
-            };
-            
-            return currentUser;
-        }
+        , [
+            '$window'
+            , function ($window) {
+                var currentUser = {
+                    role: null
+                    , isAuthorized: false
+
+                    , set: function(name, role){
+                        this.name = name;
+                        this.role = role;
+                        this.isAuthorized = true;
+
+                        try{
+                            $window.localStorage.setItem('currentUser', angular.toJson(currentUser));
+                        }
+                        catch(err){ }
+                    }
+                    , reset: function(){
+                        this.set(null, null);
+                        this.isAuthorized = false;
+                        
+                        try{
+                            $window.localStorage.removeItem('currentUser');
+                        }
+                        catch(err){ }
+                    }
+                };
+
+                return currentUser;
+            }
+        ]
     );
   
 })();

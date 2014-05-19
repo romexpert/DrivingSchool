@@ -24,7 +24,7 @@
                             <tr ng-repeat="lecture in lectures">
                                 <td>{{lecture.number}}</td>
                                 <td>
-                                    <a href="" ng-click="readLecture(lecture.number)">
+                                    <a ng-href="#/lecture{{lecture.number}}">
                                         {{lecture.name}}
                                     </a>
                                 </td>

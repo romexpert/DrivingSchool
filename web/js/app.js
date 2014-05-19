@@ -5,7 +5,8 @@
 
     school.config([
         '$routeProvider'
-        , function($routeProvider) {
+        , '$httpProvider'
+        , function($routeProvider, $httpProvider) {
             $routeProvider
                 .when(
                     '/home'
@@ -32,20 +33,44 @@
                 .otherwise({
                     redirectTo: '/logon'
                 });
+            
+            $httpProvider.responseInterceptors.push(['$q', '$location', 'currentUser', function($q, $location, currentUser) {
+		return function(promise) {
+                    return promise.catch(function(response) {
+                            if (response.status === 403) {
+                                currentUser.reset();
+                                $location.path('/logon');
+                            }
+                            return $q.reject(response);
+                    });
+		}
+            }]);
         }
     ]);
     
     school.run([
         '$rootScope'
         , '$location'
+        , '$window'
         , 'currentUser'
-        , function($rootScope, $location, currentUser){
+        , function($rootScope, $location, $window, currentUser){
             $rootScope.$on(
                 '$routeChangeStart'
                 , function(){
-                    if(!currentUser.isAuthorized && $location.$$path && $location.$$path !== '/logon')
+                    if(!currentUser.isAuthorized && $location.$$path && $location.$$path !== '/logon'){
+                        try{
+                            var user = angular.fromJson($window.localStorage.getItem('currentUser'));
+                            if(user && user.isAuthorized){
+                                currentUser.set(user.name, user.role);
+                                return;
+                            }
+                        }
+                        catch(err){ }
+
                         $location.path('/logon');
-                })
+                    }
+                }
+            );
         }
     ]);
     

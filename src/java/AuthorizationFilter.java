@@ -24,9 +24,11 @@ public class AuthorizationFilter implements Filter {
         
         Cookie[] cookies = ((HttpServletRequest)request).getCookies();
         UUID sessionId = null;
-        for(Cookie cookie : cookies){
-            if("sessionId".equals(cookie.getName())){
-                sessionId = UUID.fromString(cookie.getValue());
+        if(cookies != null){
+            for(Cookie cookie : cookies){
+                if("sessionId".equals(cookie.getName())){
+                    sessionId = UUID.fromString(cookie.getValue());
+                }
             }
         }
         

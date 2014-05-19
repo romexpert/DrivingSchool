@@ -31,9 +31,6 @@
             , function($scope, $location, lectures, exercises) {
                 $scope.lectures = lectures.query();
                 $scope.exercises = exercises.query();
-                $scope.readLecture = function(number){
-                    $location.path('/lecture' + number);
-                }
             }
         ]
     );
@@ -77,7 +74,7 @@
                         .then(function(data){
                             //TODO: form server
                             currentUser.set(data.name, data.role);
-                            $location.path('home');
+                            $location.path('/home');
                         })
                         .catch(function(error){
                             errorFactory.addError(
