@@ -1,31 +1,46 @@
 package entities;
+
+import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  *
  * @author admin
  */
-public class Lecture {
-    private int _number;
-    private String _name;
-    private String _status;
+@Entity
+@Table(name="Lectures")
+public class Lecture implements Serializable {
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private int iid;
+    private int number;
+    private String name;
+    private String status;
     
+    public Lecture() {
+    }
     
     public Lecture(int number, String name, String status){
-        _number = number;
-        _name = name;
-        _status = status;
+        this.number = number;
+        this.name = name;
+        this.status = status;
     }
     
     
     public int getNumber(){
-        return _number;
+        return number;
     }
     
     public String getName(){
-        return _name;
+        return name;
     }
     
     public String getStatus(){
-        return _status;
+        return status;
     }
     
     
