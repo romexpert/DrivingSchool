@@ -6,31 +6,60 @@
         'AppCtrl'
         , [
             '$scope'
+            , '$window'
             , '$location'
             , 'currentUser'
             , 'errorFactory'
-            , function($scope, $location, currentUser, errorFactory) {
+            , function($scope, $window, $location, currentUser, errorFactory) {
                 $scope.currentUser = currentUser;
                 $scope.errorFactory = errorFactory;
+                $scope.roles = $window.driftMan.roles;
+                
+                $scope.isTabActive = function(url){
+                    return $location.$$path === url;
+                };
+                
+                $scope.inRole = function(role){
+                    return currentUser.role === role;
+                };
                 
                 $scope.logout = function(){
                     currentUser.reset();
                     $location.path('/logon')
-                }
+                };
             }
         ]
     );
     
     schoolControllers.controller(
-        'HomeCtrl'
+        'StudentHomeCtrl'
         , [
             '$scope'
-            , '$location'
             , 'lectures'
             , 'exercises'
-            , function($scope, $location, lectures, exercises) {
+            , function($scope, lectures, exercises) {
                 $scope.lectures = lectures.query();
                 $scope.exercises = exercises.query();
+            }
+        ]
+    );
+    
+    schoolControllers.controller(
+        'TeacherHomeCtrl'
+        , [
+            '$scope'
+            , function($scope){
+                
+            }
+        ]
+    );
+    
+    schoolControllers.controller(
+        'AdminHomeCtrl'
+        , [
+            '$scope'
+            , function($scope){
+                
             }
         ]
     );
@@ -39,11 +68,12 @@
         'LogonCtrl'
         , [
             '$scope'
+            , '$window'
             , '$location'
             , 'logon'
             , 'currentUser'
             , 'errorFactory'
-            , function($scope, $location, logon, currentUser, errorFactory) {
+            , function($scope, $window, $location, logon, currentUser, errorFactory) {
                 $scope.credentials = { email: 'student@driftman.ru', password: 'student123' };
                 
                 var credentials = {
@@ -74,7 +104,14 @@
                         .then(function(data){
                             //TODO: form server
                             currentUser.set(data.name, data.role);
-                            $location.path('/home');
+                            
+                            var newPath = '/studentHome';
+                            if(data.role === $window.driftMan.roles.Teacher)
+                                newPath = '/teacherHome';
+                            else if(data.role === $window.driftMan.roles.Admin)
+                                newPath = '/adminHome';
+                                
+                            $location.path(newPath);
                         })
                         .catch(function(error){
                             errorFactory.addError(

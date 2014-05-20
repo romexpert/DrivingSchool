@@ -9,10 +9,10 @@
         , function($routeProvider, $httpProvider) {
             $routeProvider
                 .when(
-                    '/home'
+                    '/studentHome'
                     , {
-                        templateUrl: 'partials/home.html'
-                        , controller: 'HomeCtrl'
+                        templateUrl: 'partials/studentHome.html'
+                        , controller: 'StudentHomeCtrl'
                     }
                 )
                 .when(
@@ -21,6 +21,20 @@
                         templateUrl: function(params){
                             return 'partials/lectures/lecture' + params.number + '.html';
                         }
+                    }
+                )
+                .when(
+                    '/teacherHome'
+                    , {
+                        templateUrl: 'partials/teacherHome.html'
+                        , controller: 'TeacherHomeCtrl'
+                    }
+                )
+                .when(
+                    '/adminHome'
+                    , {
+                        templateUrl: 'partials/adminHome.html'
+                        , controller: 'AdminHomeCtrl'
                     }
                 )
                 .when(
