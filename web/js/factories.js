@@ -33,6 +33,16 @@
     );
     
     schoolFactories.factory(
+        'teachers'
+        , [
+            '$resource'
+            , function($resource){
+                return $resource('TeacherApi');
+            }
+        ]
+    );
+    
+    schoolFactories.factory(
         'errorFactory'
         , function () {
             var container = [];

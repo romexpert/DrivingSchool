@@ -58,8 +58,9 @@
         'AdminHomeCtrl'
         , [
             '$scope'
-            , function($scope){
-                
+            , 'teachers'
+            , function($scope, teachers){
+                $scope.teachers = teachers.query();
             }
         ]
     );

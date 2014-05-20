@@ -40,7 +40,6 @@ public class Exercise {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'");
         df.setTimeZone(TimeZone.getTimeZone("UTC"));
         
-        //SimpleDateFormat.
         return String.format("{\"number\": %1$s, \"datetime\": \"%2$s\", \"status\": \"%3$s\"}", getNumber(), df.format(getDateTime()), getStatus());
     }
 }
