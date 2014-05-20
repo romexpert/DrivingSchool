@@ -58,9 +58,22 @@
         'AdminHomeCtrl'
         , [
             '$scope'
+            , 'groups'
             , 'teachers'
-            , function($scope, teachers){
+            , function($scope, groups, teachers){
                 $scope.teachers = teachers.query();
+                $scope.groups = groups.query();
+                
+                $scope.getTeacherName = function(teacherId){
+                    var teacher = $.grep($scope.teachers, function(value){
+                        return value.id == teacherId;
+                    })[0];
+                    
+                    if(!teacher)
+                        return teacherId;
+                    
+                    return teacher.name;
+                };
             }
         ]
     );

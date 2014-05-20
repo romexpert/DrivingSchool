@@ -15,9 +15,7 @@ public class TeacherApi extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Account account = (Account)request.getAttribute("account");
-        if(AccountRole.Admin != account.getRole()){
-            response.sendError(HttpServletResponse.SC_FORBIDDEN);
+        if(!RoleHelper.IsInRole(request, response, AccountRole.Admin)){
             return;
         }
         

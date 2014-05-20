@@ -43,6 +43,16 @@
     );
     
     schoolFactories.factory(
+        'groups'
+        , [
+            '$resource'
+            , function($resource){
+                return $resource('GroupApi');
+            }
+        ]
+    );
+    
+    schoolFactories.factory(
         'errorFactory'
         , function () {
             var container = [];

@@ -16,6 +16,10 @@
         <filter-name>AuthorizationFilter</filter-name>
         <servlet-name>TeacherApi</servlet-name>
     </filter-mapping>
+    <filter-mapping>
+        <filter-name>AuthorizationFilter</filter-name>
+        <servlet-name>GroupApi</servlet-name>
+    </filter-mapping>
     <servlet>
         <servlet-name>LogonApi</servlet-name>
         <servlet-class>LogonApi</servlet-class>
@@ -32,6 +36,10 @@
         <servlet-name>TeacherApi</servlet-name>
         <servlet-class>TeacherApi</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GroupApi</servlet-name>
+        <servlet-class>GroupApi</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LogonApi</servlet-name>
         <url-pattern>/LogonApi</url-pattern>
@@ -47,6 +55,10 @@
     <servlet-mapping>
         <servlet-name>TeacherApi</servlet-name>
         <url-pattern>/TeacherApi</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GroupApi</servlet-name>
+        <url-pattern>/GroupApi</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
