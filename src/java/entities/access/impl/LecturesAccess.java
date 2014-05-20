@@ -12,6 +12,7 @@ import entities.util.HibernateUtil;
 import java.sql.SQLException;
 import java.util.List;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 /**
  *
@@ -57,6 +58,27 @@ public class LecturesAccess implements ILecturesAccess{
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
             session.delete(lecture);
+        }
+        finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public void addOrUpdateLecturesPack(List<Lecture> lectures) throws SQLException {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            Transaction tran = session.beginTransaction();
+            try {
+                lectures.forEach((lecture) -> {
+                    session.saveOrUpdate(lecture);
+                });
+                tran.commit();
+            }
+            catch(Exception ex) {
+                tran.rollback();
+                throw ex;
+            }
         }
         finally {
             session.close();

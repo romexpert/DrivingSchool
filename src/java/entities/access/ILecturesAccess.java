@@ -16,6 +16,7 @@ import java.util.List;
  */
 public interface ILecturesAccess {
     public void addOrUpdateLecture(Lecture lecture) throws SQLException;
+    public void addOrUpdateLecturesPack(List<Lecture> lectures) throws SQLException;
     public Lecture getLecture(int id) throws SQLException;
     public List getAllLectures() throws SQLException;
     public void removeLecture(Lecture lecture) throws SQLException;

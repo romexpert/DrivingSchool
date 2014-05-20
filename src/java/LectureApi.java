@@ -1,6 +1,9 @@
 import entities.Lecture;
+import entities.access.ILecturesAccess;
+import entities.util.AccessFactory;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.sql.SQLException;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -22,16 +25,23 @@ public class LectureApi extends HttpServlet {
         
         response.setContentType("application/json; charset=utf-8");
         //TODO
-        
-        ArrayList<Lecture> lectures = new ArrayList<>();
-        lectures.add(new Lecture(1, "Первая лекция", "Пройдена"));
-        lectures.add(new Lecture(2, "Вторая лекция", "Пройдена"));
-        lectures.add(new Lecture(3, "Третья лекция", "Не пройдена"));
-        lectures.add(new Lecture(4, "Четверная лекция", "Не пройдена"));
-        
         JSONArray data = new JSONArray();
-        data.addAll(lectures);
-
+        ILecturesAccess access = AccessFactory.getAccessFactory().LecturesAccess();
+        try {
+            List<Lecture> lectures = access.getAllLectures();
+            if(lectures.size() < 1) {
+                lectures.add(new Lecture(1, "Первая лекция", "Пройдена"));
+                lectures.add(new Lecture(2, "Вторая лекция", "Пройдена"));
+                lectures.add(new Lecture(3, "Третья лекция", "Не пройдена"));
+                lectures.add(new Lecture(4, "Четверная лекция", "Не пройдена"));
+                access.addOrUpdateLecturesPack(lectures);
+            }
+            
+            data.addAll(access.getAllLectures());
+        }
+        catch(SQLException ex) {
+            ex.printStackTrace();
+        }
         data.writeJSONString(response.getWriter());
     }
 
