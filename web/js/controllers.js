@@ -75,7 +75,6 @@
             , 'currentUser'
             , 'errorFactory'
             , function($scope, $window, $location, logon, currentUser, errorFactory) {
-                $scope.credentials = { email: 'student@driftman.ru', password: 'student123' };
                 
                 var credentials = {
                     currentCredIndex: 0
@@ -84,12 +83,18 @@
                         , { email: 'teacher@driftman.ru', password: 'teacher123' }
                         , { email: 'admin@driftman.ru', password: 'admin123' }
                     ]
-                    , nextCredentials: function(){
+                    , nextCredentials: function(index){
+                        if(index)
+                            this.currentCredIndex = --index;
                         if(++this.currentCredIndex >= this.credArray.length)
                             this.currentCredIndex = 0;
+                        
+                        $window.localStorage.setItem('credIndex', this.currentCredIndex);
                         return this.credArray[this.currentCredIndex];
                     }
                 }
+                
+                $scope.credentials = credentials.nextCredentials($window.localStorage.getItem('credIndex'));
                 
                 $scope.changeCredentials = function(e){
                     if(e.shiftKey && e.keyCode === 38){
