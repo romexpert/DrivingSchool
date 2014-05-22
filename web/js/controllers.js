@@ -107,7 +107,7 @@
                     staff.save(
                         $scope.person
                         , function(){
-                            $location.path('/adminHome').search('activeTab', 'staff');
+                            $location.path('/adminHome').search('activeTab', 'staff').replace();
                         }
                     );
                 }
