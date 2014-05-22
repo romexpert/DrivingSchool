@@ -1,49 +1,48 @@
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-12">
-            <!-- Nav tabs -->
-            <ul class="nav nav-tabs">
-                <li class="active"><a href="" data-target="#groups" data-toggle="tab">Группы</a></li>
-                <li><a href="" data-target="#teachers" data-toggle="tab">Преподаватели</a></li>
-            </ul>
+<!-- Nav tabs -->
+<ul class="nav nav-tabs">
+    <li class="active"><a href="" data-target="#groups" data-toggle="tab">Группы</a></li>
+    <li><a href="" data-target="#staff" data-toggle="tab">Работники</a></li>
+</ul>
 
-            <!-- Tab panes -->
-            <div class="tab-content">
-                <div class="tab-pane active" id="groups">
-                    <h2>Группы</h2>
-                    <table class="table table-striped table-hover">
-                        <thead>
-                            <tr>
-                                <th>№</th>
-                                <th>Преподаватель</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="group in groups">
-                                <td>{{group.number}}</td>
-                                <td>{{getTeacherName(group.teacherId)}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="tab-pane" id="teachers">
-                    <h2>Преподаватели</h2>
-                    <table class="table table-striped table-hover">
-                        <thead>
-                            <tr>
-                                <th>Имя</th>
-                                <th>Телефон</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="teacher in teachers">
-                                <td>{{teacher.name}}</td>
-                                <td>{{teacher.phone}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
+<!-- Tab panes -->
+<div class="tab-content">
+    <div class="tab-pane active" id="groups">
+        <h2>Группы</h2>
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>№</th>
+                    <th>Преподаватель</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="group in groups">
+                    <td>{{group.number}}</td>
+                    <td>{{getTeacherName(group.teacherId)}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="tab-pane" id="staff">
+        <h2>
+            Работники
+            <button class="btn btn-primary">добавить</button>
+        </h2>
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Имя</th>
+                    <th>Телефон</th>
+                    <th>Должность</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="employee in staff">
+                    <td>{{employee.name}}</td>
+                    <td>{{employee.phone}}</td>
+                    <td>{{employee.role}}</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>

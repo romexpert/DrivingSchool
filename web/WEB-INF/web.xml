@@ -14,7 +14,7 @@
     </filter-mapping>
     <filter-mapping>
         <filter-name>AuthorizationFilter</filter-name>
-        <servlet-name>TeacherApi</servlet-name>
+        <servlet-name>StaffApi</servlet-name>
     </filter-mapping>
     <filter-mapping>
         <filter-name>AuthorizationFilter</filter-name>
@@ -33,8 +33,8 @@
         <servlet-class>ExerciseApi</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>TeacherApi</servlet-name>
-        <servlet-class>TeacherApi</servlet-class>
+        <servlet-name>StaffApi</servlet-name>
+        <servlet-class>StaffApi</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>GroupApi</servlet-name>
@@ -53,8 +53,8 @@
         <url-pattern>/ExerciseApi</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>TeacherApi</servlet-name>
-        <url-pattern>/TeacherApi</url-pattern>
+        <servlet-name>StaffApi</servlet-name>
+        <url-pattern>/StaffApi</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>GroupApi</servlet-name>

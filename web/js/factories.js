@@ -33,11 +33,11 @@
     );
     
     schoolFactories.factory(
-        'teachers'
+        'staff'
         , [
             '$resource'
             , function($resource){
-                return $resource('TeacherApi');
+                return $resource('StaffApi');
             }
         ]
     );

@@ -14,13 +14,13 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="mainMenu">
             <ul class="nav navbar-nav">
-                <li ng-class="{active: isTabActive('/studentHome')}" ng-if="inRole(roles.Student)">
+                <li ng-class="{active: isTabActive('/studentHome')}" ng-if="isInRole(roles.Student)">
                     <a href="#/studentHome">Главная</a>
                 </li>
-                <li ng-class="{active: isTabActive('/teacherHome')}" ng-if="inRole(roles.Teacher)">
+                <li ng-class="{active: isTabActive('/teacherHome')}" ng-if="isInRole(roles.Teacher)">
                     <a href="#/teacherHome">Главная</a>
                 </li>
-                <li ng-class="{active: isTabActive('/adminHome')}" ng-if="inRole(roles.Admin)">
+                <li ng-class="{active: isTabActive('/adminHome')}" ng-if="isInRole(roles.Admin)">
                     <a href="#/adminHome">Главная</a>
                 </li>
             </ul>

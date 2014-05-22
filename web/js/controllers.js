@@ -19,7 +19,7 @@
                     return $location.$$path === url;
                 };
                 
-                $scope.inRole = function(role){
+                $scope.isInRole = function(role){
                     return currentUser.role === role;
                 };
                 
@@ -59,13 +59,13 @@
         , [
             '$scope'
             , 'groups'
-            , 'teachers'
-            , function($scope, groups, teachers){
-                $scope.teachers = teachers.query();
+            , 'staff'
+            , function($scope, groups, staff){
+                $scope.staff = staff.query();
                 $scope.groups = groups.query();
                 
                 $scope.getTeacherName = function(teacherId){
-                    var teacher = $.grep($scope.teachers, function(value){
+                    var teacher = $.grep($scope.staff, function(value){
                         return value.id == teacherId;
                     })[0];
                     

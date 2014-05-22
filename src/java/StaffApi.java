@@ -10,7 +10,7 @@ import org.json.simple.JSONArray;
  *
  * @author admin
  */
-public class TeacherApi extends HttpServlet {
+public class StaffApi extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -22,13 +22,14 @@ public class TeacherApi extends HttpServlet {
         response.setContentType("application/json; charset=utf-8");
         //TODO
         
-        ArrayList<Person> teachers = new ArrayList<>();
-        teachers.add(new Person(1, "Преподаватель 1", "1 2345678", AccountRole.Teacher));
-        teachers.add(new Person(2, "Преподаватель 2", "2 2345678", AccountRole.Teacher));
-        teachers.add(new Person(3, "Преподаватель 3", "3 2345678", AccountRole.Teacher));
+        ArrayList<Person> staff = new ArrayList<>();
+        staff.add(new Person(1, "Админ Андрюша", "1 2345678", AccountRole.Admin));
+        staff.add(new Person(2, "Преподаватель 2", "2 2345678", AccountRole.Teacher));
+        staff.add(new Person(3, "Преподаватель 3", "3 2345678", AccountRole.Teacher));
+        staff.add(new Person(1, "Преподаватель 4", "4 2345678", AccountRole.Teacher));
         
         JSONArray data = new JSONArray();
-        data.addAll(teachers);
+        data.addAll(staff);
 
         data.writeJSONString(response.getWriter());
     }
