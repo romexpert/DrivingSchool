@@ -58,11 +58,19 @@
         'AdminHomeCtrl'
         , [
             '$scope'
+            , '$location'
             , 'groups'
             , 'staff'
-            , function($scope, groups, staff){
+            , '$routeParams'
+            , function($scope, $location, groups, staff, $routeParams){
                 $scope.staff = staff.query();
                 $scope.groups = groups.query();
+                
+                $scope.isTabActive = function(tab){
+                    if($routeParams.activeTab)
+                        return $routeParams.activeTab === tab;
+                    return tab === 'groups';
+                };
                 
                 $scope.getTeacherName = function(teacherId){
                     var teacher = $.grep($scope.staff, function(value){
@@ -74,6 +82,35 @@
                     
                     return teacher.name;
                 };
+                
+                $scope.addEmployee = function(){
+                    $location.path('/addEmployee');
+                };
+            }
+        ]
+    );
+    
+    schoolControllers.controller(
+        'AddEmployeeCtrl'
+        , [
+            '$scope'
+            , '$window'
+            , '$location'
+            , 'staff'
+            , function($scope, $window, $location, staff){
+                $scope.positions = $window.driftMan.positions;
+                $scope.person = {
+                    role: $scope.positions[1].value //Teacher
+                };
+                
+                $scope.save = function(){
+                    staff.save(
+                        $scope.person
+                        , function(){
+                            $location.path('/adminHome').search('activeTab', 'staff');
+                        }
+                    );
+                }
             }
         ]
     );

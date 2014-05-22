@@ -38,6 +38,13 @@
                     }
                 )
                 .when(
+                    '/addEmployee'
+                    , {
+                        templateUrl: 'partials/addEmployee.html'
+                        , controller: 'AddEmployeeCtrl'
+                    }
+                )
+                .when(
                     '/logon'
                     , {
                         templateUrl: 'partials/logon.html'

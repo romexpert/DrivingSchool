@@ -5,3 +5,12 @@ driftMan.roles = {
     , Teacher: 'Teacher'
     , Admin: 'Admin'
 };
+
+driftMan.positions = [{
+        text: 'Администратор'
+        , value: driftMan.roles.Admin
+    }, {
+        text: 'Учитель'
+        , value: driftMan.roles.Teacher
+    }
+];

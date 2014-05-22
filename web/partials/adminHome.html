@@ -1,12 +1,12 @@
 <!-- Nav tabs -->
 <ul class="nav nav-tabs">
-    <li class="active"><a href="" data-target="#groups" data-toggle="tab">Группы</a></li>
-    <li><a href="" data-target="#staff" data-toggle="tab">Работники</a></li>
+    <li ng-class="{active: isTabActive('groups')}"><a href="" data-target="#groups" data-toggle="tab">Группы</a></li>
+    <li ng-class="{active: isTabActive('staff')}"><a href="" data-target="#staff" data-toggle="tab">Работники</a></li>
 </ul>
 
 <!-- Tab panes -->
 <div class="tab-content">
-    <div class="tab-pane active" id="groups">
+    <div class="tab-pane" ng-class="{active: isTabActive('groups')}" id="groups">
         <h2>Группы</h2>
         <table class="table table-striped table-hover">
             <thead>
@@ -23,10 +23,10 @@
             </tbody>
         </table>
     </div>
-    <div class="tab-pane" id="staff">
+    <div class="tab-pane" ng-class="{active: isTabActive('staff')}" id="staff">
         <h2>
             Работники
-            <button class="btn btn-primary">добавить</button>
+            <button class="btn btn-primary" ng-click="addEmployee()">добавить</button>
         </h2>
         <table class="table table-striped table-hover">
             <thead>
