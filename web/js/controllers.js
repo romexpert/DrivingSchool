@@ -58,11 +58,12 @@
         'AdminHomeCtrl'
         , [
             '$scope'
+            , '$window'
             , '$location'
             , 'groups'
             , 'staff'
             , '$routeParams'
-            , function($scope, $location, groups, staff, $routeParams){
+            , function($scope, $window, $location, groups, staff, $routeParams){
                 $scope.staff = staff.query();
                 $scope.groups = groups.query();
                 
@@ -81,6 +82,12 @@
                         return teacherId;
                     
                     return teacher.name;
+                };
+                
+                $scope.getPositionName = function(role){
+                    return $window.$.grep($window.driftMan.positions, function(value){
+                        return value.value === role;
+                    })[0].text;
                 };
                 
                 $scope.addEmployee = function(){

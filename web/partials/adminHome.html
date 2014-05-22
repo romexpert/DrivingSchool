@@ -40,7 +40,7 @@
                 <tr ng-repeat="employee in staff">
                     <td>{{employee.name}}</td>
                     <td>{{employee.phone}}</td>
-                    <td>{{employee.role}}</td>
+                    <td>{{getPositionName(employee.role)}}</td>
                 </tr>
             </tbody>
         </table>
