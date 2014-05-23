@@ -22,9 +22,17 @@ public class LecturesAccess implements ILecturesAccess{
 
     @Override
     public void addOrUpdateLecture(Lecture lecture) throws SQLException {
+        Transaction tran = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
+            tran = session.beginTransaction();
             session.saveOrUpdate(lecture);
+            tran.commit();
+        }
+        catch(Exception ex) {
+            if(tran != null)
+                tran.rollback();
+            throw ex;
         }
         finally {
             session.close();
@@ -55,9 +63,17 @@ public class LecturesAccess implements ILecturesAccess{
 
     @Override
     public void removeLecture(Lecture lecture) throws SQLException {
+        Transaction tran = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
+            tran = session.beginTransaction();
             session.delete(lecture);
+            tran.commit();
+        }
+        catch(Exception ex) {
+            if(tran != null)
+                tran.rollback();
+            throw ex;
         }
         finally {
             session.close();
@@ -66,19 +82,17 @@ public class LecturesAccess implements ILecturesAccess{
 
     @Override
     public void addOrUpdateLecturesPack(List<Lecture> lectures) throws SQLException {
+        Transaction tran = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
-            Transaction tran = session.beginTransaction();
-            try {
-                lectures.forEach((lecture) -> {
-                    session.saveOrUpdate(lecture);
-                });
-                tran.commit();
-            }
-            catch(Exception ex) {
+            tran = session.beginTransaction();
+            lectures.forEach(a->session.saveOrUpdate(a));
+            tran.commit();
+        }
+        catch(Exception ex) {
+            if(tran != null)
                 tran.rollback();
-                throw ex;
-            }
+            throw ex;
         }
         finally {
             session.close();

@@ -1,11 +1,12 @@
 package entities;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import org.hibernate.annotations.GenericGenerator;
 
 /**
  *
@@ -14,9 +15,9 @@ import javax.persistence.Table;
 @Entity
 @Table(name="Lectures")
 public class Lecture implements Serializable {
-    @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    
     private int iid;
+    
     private int number;
     private String name;
     private String status;
@@ -52,6 +53,10 @@ public class Lecture implements Serializable {
     /**
      * @return the iid
      */
+    @Id
+    @GeneratedValue(generator="increment")
+    @GenericGenerator(name="increment", strategy="increment")
+    @Column(name="IID")
     public int getIid() {
         return iid;
     }
