@@ -20,7 +20,9 @@
             </thead>
             <tbody>
                 <tr ng-repeat="group in groups">
-                    <td>{{group.name}}</td>
+                    <td>
+                        <a ng-href="#/editGroup/{{group.id}}">{{group.name}}</a>
+                    </td>
                     <td>{{getTeacherName(group.teacherId)}}</td>
                 </tr>
             </tbody>
