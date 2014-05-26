@@ -2,6 +2,17 @@
 
     var schoolControllers = angular.module('schoolControllers', []);
 
+    var getPersonName = function(personId, staff){
+        var person = $.grep(staff, function(value){
+            return value.id == personId;
+        })[0];
+
+        if(!person)
+            return personId;
+
+        return person.name;
+    };
+
     schoolControllers.controller(
         'AppCtrl'
         , [
@@ -74,14 +85,7 @@
                 };
                 
                 $scope.getTeacherName = function(teacherId){
-                    var teacher = $.grep($scope.staff, function(value){
-                        return value.id == teacherId;
-                    })[0];
-                    
-                    if(!teacher)
-                        return teacherId;
-                    
-                    return teacher.name;
+                    return getPersonName(teacherId, $scope.staff);
                 };
                 
                 $scope.getPositionName = function(role){
@@ -168,7 +172,11 @@
                     });
                 });
                 $scope.teachers = staff.query({role:$window.driftMan.roles.Teacher});
+                $scope.students = staff.query({role:$window.driftMan.roles.Student,groupId:$routeParams.groupId});
                 
+                $scope.getTeacherName = function(teacherId){
+                    return getPersonName(teacherId, $scope.teachers);
+                };
                 
                 $scope.save = function(){
                     console.log($scope.group);

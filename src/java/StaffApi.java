@@ -23,10 +23,10 @@ public class StaffApi extends HttpServlet {
         //Handle "role" filter
         
         ArrayList<Person> staff = new ArrayList<>();
-        staff.add(new Person(1, "Админ Андрюша", "1 2345678", AccountRole.Admin));
-        staff.add(new Person(2, "Преподаватель 2", "2 2345678", AccountRole.Teacher));
-        staff.add(new Person(3, "Преподаватель 3", "3 2345678", AccountRole.Teacher));
-        staff.add(new Person(1, "Преподаватель 4", "4 2345678", AccountRole.Teacher));
+        staff.add(new Person(1, "Админ Андрюша", "admin@driftman.ru", "1 2345678", AccountRole.Admin));
+        staff.add(new Person(2, "Преподаватель 2", "teacher@driftman.ru", "2 2345678", AccountRole.Teacher));
+        staff.add(new Person(3, "Преподаватель 3", "teacher1@driftman.ru", "3 2345678", AccountRole.Teacher));
+        staff.add(new Person(1, "Преподаватель 4", "teacher2@driftman.ru", "4 2345678", AccountRole.Teacher));
         
         JSONArray data = new JSONArray();
         data.addAll(staff);
