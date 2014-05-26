@@ -3,18 +3,24 @@
  * @author admin
  */
 public class Group {
-    private int _number;
+    private int _id;
+    private String _name;
     private int _teacherId;
     
     
-    public Group(int number, int teacherId){
-        _number = number;
+    public Group(int id, String name, int teacherId){
+        _id = id;
+        _name = name;
         _teacherId = teacherId;
     }
     
     
-    public int getNumber(){
-        return _number;
+    public int getId(){
+        return _id;
+    }
+    
+    public String getName(){
+        return _name;
     }
     
     public int getTeacherId(){
@@ -24,6 +30,6 @@ public class Group {
     
     @Override
     public String toString(){
-        return String.format("{\"number\": %s, \"teacherId\": %s}", getNumber(), getTeacherId());
+        return String.format("{\"id\": %s, \"name\": \"%s\", \"teacherId\": %s}", getId(), getName(), getTeacherId());
     }
 }

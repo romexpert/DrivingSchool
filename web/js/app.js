@@ -45,6 +45,20 @@
                     }
                 )
                 .when(
+                    '/addGroup'
+                    , {
+                        templateUrl: 'partials/addGroup.html'
+                        , controller: 'AddGroupCtrl'
+                    }
+                )
+                .when(
+                    '/editGroup/:groupId'
+                    , {
+                        templateUrl: 'partials/editGroup.html'
+                        , controller: 'EditGroupCtrl'
+                    }
+                )
+                .when(
                     '/logon'
                     , {
                         templateUrl: 'partials/logon.html'

@@ -20,7 +20,6 @@ public class ExerciseApi extends HttpServlet {
             return;
         }
         
-        response.setContentType("application/json; charset=utf-8");
         //TODO
         
         ArrayList<Exercise> lectures = new ArrayList<>();

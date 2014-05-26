@@ -44,6 +44,7 @@ public class AuthorizationFilter implements Filter {
         }
         
         request.setAttribute("account", account);
+        response.setContentType("application/json; charset=utf-8");
         
         chain.doFilter(request, response);
     }

@@ -23,7 +23,6 @@ public class LectureApi extends HttpServlet {
             return;
         }
         
-        response.setContentType("application/json; charset=utf-8");
         //TODO
         JSONArray data = new JSONArray();
         ILecturesAccess access = AccessFactory.getAccessFactory().LecturesAccess();

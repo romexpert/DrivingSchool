@@ -37,7 +37,7 @@
         , [
             '$resource'
             , function($resource){
-                return $resource('StaffApi');
+                return $resource('StaffApi?role=:role');
             }
         ]
     );

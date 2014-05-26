@@ -93,6 +93,10 @@
                 $scope.addEmployee = function(){
                     $location.path('/addEmployee');
                 };
+                
+                $scope.addGroup = function(){
+                    $location.path('/addGroup');
+                };
             }
         ]
     );
@@ -115,6 +119,66 @@
                         $scope.person
                         , function(){
                             $location.path('/adminHome').search('activeTab', 'staff').replace();
+                        }
+                    );
+                }
+            }
+        ]
+    );
+    
+    schoolControllers.controller(
+        'AddGroupCtrl'
+        , [
+            '$scope'
+            , '$window'
+            , '$location'
+            , 'groups'
+            , 'staff'
+            , function($scope, $window, $location, groups, staff){
+                $scope.group = { teacherId: null };
+                $scope.teachers = staff.query({role:$window.driftMan.roles.Teacher});
+                
+                $scope.save = function(){
+                    console.log($scope.group);
+                    groups.save(
+                        $scope.group
+                        , function(data){
+                            $location.path('/editGroup/' + data.id).replace();
+                        }
+                    );
+                }
+            }
+        ]
+    );
+    
+    schoolControllers.controller(
+        'EditGroupCtrl'
+        , [
+            '$scope'
+            , '$window'
+            , '$location'
+            , '$routeParams'
+            , 'groups'
+            , 'staff'
+            , function($scope, $window, $location, $routeParams, groups, staff){
+                groups.query(function(data){
+                    angular.forEach(data, function(value){
+                        if(value.id == $routeParams.groupId)
+                            $scope.group = value;
+                    });
+                });
+                $scope.teachers = staff.query({role:$window.driftMan.roles.Teacher});
+                
+                
+                $scope.save = function(){
+                    console.log($scope.group);
+                    groups.save(
+                        $scope.group
+                        , function(data){
+                            //debugger;
+                            console.log(data);
+                            //data.id;
+                            //$location.path('/adminHome').replace();
                         }
                     );
                 }

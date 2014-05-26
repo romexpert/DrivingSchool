@@ -19,8 +19,8 @@ public class StaffApi extends HttpServlet {
             return;
         }
         
-        response.setContentType("application/json; charset=utf-8");
         //TODO
+        //Handle "role" filter
         
         ArrayList<Person> staff = new ArrayList<>();
         staff.add(new Person(1, "Админ Андрюша", "1 2345678", AccountRole.Admin));
