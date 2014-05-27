@@ -40,8 +40,15 @@
                 .when(
                     '/addEmployee'
                     , {
-                        templateUrl: 'partials/addEmployee.html'
+                        templateUrl: 'partials/addPerson.html'
                         , controller: 'AddEmployeeCtrl'
+                    }
+                )
+                .when(
+                    '/addStudent/:groupId'
+                    , {
+                        templateUrl: 'partials/addStudent.html'
+                        , controller: 'AddStudentCtrl'
                     }
                 )
                 .when(

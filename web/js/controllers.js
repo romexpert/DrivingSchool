@@ -117,6 +117,7 @@
                 $scope.person = {
                     role: $scope.positions[1].value //Teacher
                 };
+                $scope.$window = $window;
                 
                 $scope.save = function(){
                     staff.save(
@@ -172,21 +173,46 @@
                     });
                 });
                 $scope.teachers = staff.query({role:$window.driftMan.roles.Teacher});
-                $scope.students = staff.query({role:$window.driftMan.roles.Student,groupId:$routeParams.groupId});
+                $scope.students = staff.query({role:$window.driftMan.roles.Student, groupId:$routeParams.groupId});
                 
                 $scope.getTeacherName = function(teacherId){
                     return getPersonName(teacherId, $scope.teachers);
                 };
                 
+                $scope.addStudent = function(){
+                    $location.path('/addStudent/' + $routeParams.groupId)
+                }
+            }
+        ]
+    );
+    
+    schoolControllers.controller(
+        'AddStudentCtrl'
+        , [
+            '$scope'
+            , '$window'
+            , '$location'
+            , '$routeParams'
+            , 'groups'
+            , 'staff'
+            , function($scope, $window, $location, $routeParams, groups, staff){
+                $scope.$window = $window;
+                $scope.person = {
+                    role: $window.driftMan.roles.Student
+                };
+                
+                groups.query(function(data){
+                    angular.forEach(data, function(value){
+                        if(value.id == $routeParams.groupId)
+                            $scope.group = value;
+                    });
+                });
+                
                 $scope.save = function(){
-                    console.log($scope.group);
-                    groups.save(
-                        $scope.group
-                        , function(data){
-                            //debugger;
-                            console.log(data);
-                            //data.id;
-                            //$location.path('/adminHome').replace();
+                    staff.save(
+                        $scope.person
+                        , function(){
+                            $location.path('/editGroup/' + $routeParams.groupId).replace();
                         }
                     );
                 }
