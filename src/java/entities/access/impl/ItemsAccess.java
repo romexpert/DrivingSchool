@@ -61,8 +61,8 @@ public abstract class ItemsAccess<T> implements IItemsAccess<T>{
     public void addOrUpdateItemsList(List<T> lectures) throws SQLException {
         Transaction tran = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
+        tran = session.beginTransaction();
         try {
-            tran = session.beginTransaction();
             lectures.forEach(a->session.saveOrUpdate(a));
             tran.commit();
         }

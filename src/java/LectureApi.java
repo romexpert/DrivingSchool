@@ -26,7 +26,7 @@ public class LectureApi extends HttpServlet {
         
         //TODO
         JSONArray data = new JSONArray();
-        IItemsAccess access = AccessFactory.getAccessFactory().LecturesAccess();
+        IItemsAccess<Lecture> access = AccessFactory.getAccessFactory().LecturesAccess();
         try {
             List<Lecture> lectures = access.getAllItems();
             if(lectures.size() < 1) {

@@ -6,13 +6,13 @@
 
 package entities.access;
 
-import entities.Lecture;
 import java.sql.SQLException;
 import java.util.List;
 
 /**
  *
  * @author Екатерина
+ * @param <T>
  */
 public interface IItemsAccess<T> {
     public void addOrUpdateItem(T item) throws SQLException;

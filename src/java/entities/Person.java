@@ -52,8 +52,7 @@ public class Person implements Serializable {
         
     }
     
-    public Person(int id, String name, String email, String phone, AccountRole role){
-        this.id = id;
+    public Person(String name, String email, String phone, AccountRole role){
         this.name = name;
         this.email = email;
         this.phone = phone;

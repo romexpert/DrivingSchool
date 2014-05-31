@@ -6,16 +6,19 @@
 
 package entities.util;
 
+import entities.Lecture;
+import entities.Person;
 import entities.access.IItemsAccess;
-import entities.access.impl.ItemsAccess;
 import entities.access.impl.LecturesAccess;
+import entities.access.impl.PeopleAccess;
 
 /**
  *
  * @author Екатерина
  */
 public class AccessFactory {
-    private static IItemsAccess lecturesAccess = null;
+    private static IItemsAccess<Lecture> lecturesAccess = null;
+    private static IItemsAccess<Person> peopleAccess = null;
     private static AccessFactory accessFactory = null;
     
     private AccessFactory() {
@@ -32,5 +35,11 @@ public class AccessFactory {
         if(lecturesAccess == null)
             lecturesAccess = new LecturesAccess();
         return lecturesAccess;
+    }
+    
+    public IItemsAccess<Person> PeopleAccess() {
+        if(peopleAccess == null)
+            peopleAccess = new PeopleAccess();
+        return peopleAccess;
     }
 }
