@@ -39,7 +39,7 @@ public class StaffApi extends HttpServlet {
         staff.add(new Person(6, "Студент 6", "student2@driftman.ru", "6 2345678", AccountRole.Student));
         staff.add(new Person(7, "Студент 7", "student3@driftman.ru", "7 2345678", AccountRole.Student));
         
-        List<Person> result = staff.stream().filter(person -> (role == null && _staffRoles.contains(person.getRole())) || person.getRole() == role).collect(Collectors.toList());
+        List<Person> result = staff.stream().filter(person -> (role == null && _staffRoles.contains(person.getAccountRole())) || person.getAccountRole() == role).collect(Collectors.toList());
         
         JSONArray data = new JSONArray();
         data.addAll(result);

@@ -6,7 +6,8 @@
 
 package entities.util;
 
-import entities.access.ILecturesAccess;
+import entities.access.IItemsAccess;
+import entities.access.impl.ItemsAccess;
 import entities.access.impl.LecturesAccess;
 
 /**
@@ -14,7 +15,7 @@ import entities.access.impl.LecturesAccess;
  * @author Екатерина
  */
 public class AccessFactory {
-    private static ILecturesAccess lecturesAccess = null;
+    private static IItemsAccess lecturesAccess = null;
     private static AccessFactory accessFactory = null;
     
     private AccessFactory() {
@@ -27,7 +28,7 @@ public class AccessFactory {
         return accessFactory;
     }
     
-    public ILecturesAccess LecturesAccess() {
+    public IItemsAccess LecturesAccess() {
         if(lecturesAccess == null)
             lecturesAccess = new LecturesAccess();
         return lecturesAccess;
