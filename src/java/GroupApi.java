@@ -1,3 +1,4 @@
+import entities.Group;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
