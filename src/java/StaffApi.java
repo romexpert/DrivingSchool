@@ -5,7 +5,6 @@ import entities.util.AccessFactory;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.*;
-import java.util.ArrayList;
 import java.util.stream.*;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

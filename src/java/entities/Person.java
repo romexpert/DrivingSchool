@@ -1,12 +1,16 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -31,6 +35,9 @@ public class Person implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "AccountRole")
     private AccountRole accountRole;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "teacher")
+    private Set<Group> groups = new HashSet<>();
     
     public int getId(){
         return id;
@@ -111,5 +118,19 @@ public class Person implements Serializable {
      */
     public void setAccountRole(AccountRole accountRole) {
         this.accountRole = accountRole;
+    }
+
+    /**
+     * @return the groups
+     */
+    public Set<Group> getGroups() {
+        return groups;
+    }
+
+    /**
+     * @param groups the groups to set
+     */
+    public void setGroups(Set<Group> groups) {
+        this.groups = groups;
     }
 }

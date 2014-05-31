@@ -9,5 +9,6 @@
     <property name="hibernate.connection.password">app</property>
     <mapping class="entities.Lecture"/>
     <mapping class="entities.Person"/>
+    <mapping class="entities.Group"/>
   </session-factory>
 </hibernate-configuration>
