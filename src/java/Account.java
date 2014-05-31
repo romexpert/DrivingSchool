@@ -1,3 +1,4 @@
+import entities.AccountRole;
 import java.util.UUID;
 
 /**

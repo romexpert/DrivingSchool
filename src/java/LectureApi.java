@@ -1,3 +1,4 @@
+import entities.AccountRole;
 import entities.Lecture;
 import entities.access.ILecturesAccess;
 import entities.util.AccessFactory;
