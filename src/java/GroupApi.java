@@ -1,7 +1,11 @@
 import entities.AccountRole;
 import entities.Group;
+import entities.Person;
+import entities.access.IItemsAccess;
+import entities.util.AccessFactory;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -22,12 +26,11 @@ public class GroupApi extends HttpServlet {
             return;
         }
         
-        //TODO
         
         ArrayList<Group> groups = new ArrayList<>();
-        groups.add(new Group(1, "Группа 1", 1));
-        groups.add(new Group(2, "Группа 2", 2));
-        groups.add(new Group(3, "Группа 3", 3));
+        groups.add(new Group(1, "Группа 1", null));
+        groups.add(new Group(2, "Группа 2", null));
+        groups.add(new Group(3, "Группа 3", null));
         
         JSONArray data = new JSONArray();
         data.addAll(groups);

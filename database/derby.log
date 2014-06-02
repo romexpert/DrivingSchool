@@ -1,7 +1,7 @@
-Sun Jun 01 01:56:52 MSK 2014 : Сетевой сервер Apache Derby Network Server - 10.10.1.3 - (1557168) запущен и готов принимать соединения на порту 1527 на {3} 
+Tue Jun 03 00:16:06 MSK 2014 : Сетевой сервер Apache Derby Network Server - 10.10.1.3 - (1557168) запущен и готов принимать соединения на порту 1527 на {3} 
 ----------------------------------------------------------------
-Sun Jun 01 01:56:52 MSK 2014:
- Производится загрузка Derby версии The Apache Software Foundation - Apache Derby - 10.10.1.3 - (1557168): экземпляр a816c00e-0146-5449-0c63-0000138c1775
+Tue Jun 03 00:18:01 MSK 2014:
+ Производится загрузка Derby версии The Apache Software Foundation - Apache Derby - 10.10.1.3 - (1557168): экземпляр a816c00e-0146-5e39-853c-0000138c1775
 в каталоге базы данных D:\Study\DrivingSchool\database\Lectures sun.misc.Launcher$AppClassLoader@1d44bcfa 
 
 java.vendor=Oracle Corporation

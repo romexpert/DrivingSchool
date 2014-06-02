@@ -36,9 +36,6 @@ public class LectureApi extends HttpServlet {
                 lectures.add(new Lecture(4, "Четверная лекция", "Не пройдена"));
                 access.addOrUpdateItemsList(lectures);
             }
-            else {
-                access.removeItem(lectures.get(0));
-            }
             
             data.addAll(access.getAllItems());
         }

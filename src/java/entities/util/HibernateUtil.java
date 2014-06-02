@@ -16,11 +16,12 @@ import org.hibernate.cfg.Configuration;
 public class HibernateUtil {
     private static SessionFactory sessionFactory = null;
     static {
-        try {
+        try{
             sessionFactory = new Configuration().configure().buildSessionFactory();
         }
-        catch (Exception ex) {
+        catch(Exception ex) {
             ex.printStackTrace();
+            throw ex;
         }
     }
     public static SessionFactory getSessionFactory() {
