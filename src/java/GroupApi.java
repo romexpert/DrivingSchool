@@ -4,10 +4,8 @@ import entities.Person;
 import entities.access.IItemsAccess;
 import entities.util.AccessFactory;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -28,28 +26,16 @@ public class GroupApi extends HttpServlet {
             return;
         }
         
-        try{
-            IItemsAccess<Group> groupsAccess = AccessFactory.getAccessFactory().GroupsAccess();
-            List<Group> groups = groupsAccess.getAllItems();
+        
+        ArrayList<Group> groups = new ArrayList<>();
+        groups.add(new Group(1, "Группа 1", null));
+        groups.add(new Group(2, "Группа 2", null));
+        groups.add(new Group(3, "Группа 3", null));
+        
+        JSONArray data = new JSONArray();
+        data.addAll(groups);
 
-            if(groups.isEmpty()){
-                
-                IItemsAccess<Person> personAccess = AccessFactory.getAccessFactory().PeopleAccess();
-                Optional<Person> teacher = personAccess.getAllItems().stream().filter(person -> person.getAccountRole() == AccountRole.Teacher).findFirst();
-                if(teacher.isPresent()){
-                    groups.add(new Group(1, "Группа 1", teacher.get()));
-                    groups.add(new Group(2, "Группа 2", teacher.get()));
-                    groups.add(new Group(3, "Группа 3", teacher.get()));
-                }
-            }
-
-            JSONArray data = new JSONArray();
-            data.addAll(groups);
-
-            data.writeJSONString(response.getWriter());
-        } catch(SQLException ex){
-            throw new ServletException(ex);
-        }
+        data.writeJSONString(response.getWriter());
     }
 
     @Override

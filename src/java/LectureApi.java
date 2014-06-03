@@ -1,6 +1,7 @@
 import entities.AccountRole;
 import entities.Lecture;
 import entities.access.IItemsAccess;
+import entities.access.impl.LecturesAccess;
 import entities.util.AccessFactory;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -26,17 +27,12 @@ public class LectureApi extends HttpServlet {
         
         //TODO
         JSONArray data = new JSONArray();
-        IItemsAccess<Lecture> access = AccessFactory.getAccessFactory().LecturesAccess();
+        LecturesAccess access = (LecturesAccess)AccessFactory.getAccessFactory().LecturesAccess();
         try {
-            List<Lecture> lectures = access.getAllItems();
-            if(lectures.size() < 1) {
-                lectures.add(new Lecture(1, "Первая лекция", "Пройдена"));
-                lectures.add(new Lecture(2, "Вторая лекция", "Пройдена"));
-                lectures.add(new Lecture(3, "Третья лекция", "Не пройдена"));
-                lectures.add(new Lecture(4, "Четверная лекция", "Не пройдена"));
-                access.addOrUpdateItemsList(lectures);
+            for(int i = 1; i < 13; i++) {
+                if(access.getByNumber(i) == null)
+                    access.addOrUpdateItem(new Lecture(i, "Лекция " + String.valueOf(i), "Не пройдена"));
             }
-            
             data.addAll(access.getAllItems());
         }
         catch(SQLException ex) {

@@ -57,7 +57,7 @@ public class Group implements Serializable {
     
     @Override
     public String toString(){
-        return String.format("{\"id\": %s, \"name\": \"%s\", \"teacherId\": %s}", getId(), getName(), getTeacher().getId());
+        return String.format("{\"id\": %s, \"name\": \"%s\", \"teacherId\": %s}", getId(), getName(), getTeacher().toString());
     }
 
     /**
