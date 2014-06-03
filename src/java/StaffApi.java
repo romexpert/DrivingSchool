@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
 
 /**
  *
@@ -36,14 +38,15 @@ public class StaffApi extends HttpServlet {
         try {
             staff = personAccess.getAllItems();
             if(staff.size() < 1) {
-                staff.add(new Person("Админ Андрюша", "admin@driftman.ru", "1 2345678", AccountRole.Admin));
-                staff.add(new Person("Преподаватель 2", "teacher@driftman.ru", "2 2345678", AccountRole.Teacher));
-                staff.add(new Person("Преподаватель 3", "teacher1@driftman.ru", "3 2345678", AccountRole.Teacher));
-                staff.add(new Person("Преподаватель 4", "teacher2@driftman.ru", "4 2345678", AccountRole.Teacher));
+                staff.add(new Person("Админ Андрюша", "admin@driftman.ru", "1 2345678", AccountRole.Admin, "admin@driftman.ru"));
+                
+                staff.add(new Person("Учитель Андрюша", "teacher@driftman.ru", "2 2345678", AccountRole.Teacher, "teacher123"));
+                staff.add(new Person("Преподаватель 2", "teacher2@driftman.ru", "3 2345678", AccountRole.Teacher, "teacher2123"));
+                staff.add(new Person("Преподаватель 3", "teacher3@driftman.ru", "4 2345678", AccountRole.Teacher, "teacher3123"));
         
-                staff.add(new Person("Студент 5", "student@driftman.ru", "5 2345678", AccountRole.Student));
-                staff.add(new Person("Студент 6", "student2@driftman.ru", "6 2345678", AccountRole.Student));
-                staff.add(new Person("Студент 7", "student3@driftman.ru", "7 2345678", AccountRole.Student));
+                staff.add(new Person("Андрюша", "student@driftman.ru", "5 2345678", AccountRole.Student, "student123"));
+                staff.add(new Person("Студент 2", "student2@driftman.ru", "6 2345678", AccountRole.Student, "student2123"));
+                staff.add(new Person("Студент 3", "student3@driftman.ru", "7 2345678", AccountRole.Student, "student3123"));
                 
                 
                 personAccess.addOrUpdateItemsList(staff);
@@ -65,7 +68,23 @@ public class StaffApi extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        try {
+            JSONObject json = (JSONObject)JSONValue.parse(request.getReader());
+            
+            String mail = json.get("mail").toString();
+            String name = json.get("name").toString();
+            String phone = json.get("phone").toString();
+            AccountRole role = AccountRole.valueOf(json.get("role").toString());
+            String password = json.get("password").toString();
+            //TODO: validation
+            
+            Person person = new Person(name, mail, phone, role, password);
+            
+            IItemsAccess<Person> personAccess = AccessFactory.getAccessFactory().PeopleAccess();
+            personAccess.addOrUpdateItem(person);
+        } catch(Exception ex) {
+            throw new IOException("Error parsing JSON request string" + ex.toString());
+        }
     }
 
 }

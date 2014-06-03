@@ -59,11 +59,12 @@ public class Person implements Serializable {
         
     }
     
-    public Person(String name, String email, String phone, AccountRole role){
+    public Person(String name, String email, String phone, AccountRole role, String passwordHash){
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.accountRole = role;
+        this.passwordHash = passwordHash;
     }
     
     @Override
