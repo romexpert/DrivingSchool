@@ -21,7 +21,7 @@ public class PeopleAccess extends ItemsAccess<Person> {
     public Person getItem(int id) throws SQLException {
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
-            return (Person)session.load(Person.class, id);
+            return (Person)session.get(Person.class, id);
         }
         finally {
             session.close();
