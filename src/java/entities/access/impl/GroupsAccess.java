@@ -8,9 +8,11 @@ package entities.access.impl;
 
 import entities.Group;
 import entities.Lecture;
+import entities.Person;
 import entities.util.HibernateUtil;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Set;
 import org.hibernate.Session;
 
 /**
@@ -22,7 +24,9 @@ public class GroupsAccess extends ItemsAccess<Group> {
     public Group getItem(int id) throws SQLException {
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
-            return (Group)session.load(Group.class, id);
+            Group group = (Group)session.load(Group.class, id);
+            group.getStudents().toArray();
+            return group;
         }
         finally {
             session.close();

@@ -10,6 +10,8 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
@@ -38,6 +40,10 @@ public class Person implements Serializable {
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "teacher")
     private Set<Group> groups = new HashSet<>();
+    
+    @ManyToOne
+    @JoinColumn(name = "group_id", nullable = true)
+    private Group group;
     
     public int getId(){
         return id;
@@ -133,5 +139,13 @@ public class Person implements Serializable {
      */
     public void setGroups(Set<Group> groups) {
         this.groups = groups;
+    }
+    
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
     }
 }

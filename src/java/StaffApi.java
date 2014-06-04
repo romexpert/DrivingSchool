@@ -1,4 +1,5 @@
 import entities.AccountRole;
+import entities.Group;
 import entities.Person;
 import entities.access.IItemsAccess;
 import entities.util.AccessFactory;
@@ -30,7 +31,13 @@ public class StaffApi extends HttpServlet {
         }
         
         //TODO
-        //Handle "role" filter
+        Integer groupId = null;
+        try{
+            groupId = Integer.parseInt(request.getParameter("groupId"));
+        } catch(Exception ex){
+            
+        }
+        
         String roleParam = request.getParameter("role");
         AccountRole role = roleParam != null ? AccountRole.valueOf(roleParam) : null;
         IItemsAccess<Person> personAccess = AccessFactory.getAccessFactory().PeopleAccess();
@@ -52,7 +59,16 @@ public class StaffApi extends HttpServlet {
                 personAccess.addOrUpdateItemsList(staff);
             }
             
-            List<Person> result = staff.stream().filter(person -> (role == null && _staffRoles.contains(person.getAccountRole())) || person.getAccountRole() == role).collect(Collectors.toList());
+            List<Person> result;
+            
+            if(groupId == null){
+                result = staff.stream().filter(person -> (role == null && _staffRoles.contains(person.getAccountRole())) || person.getAccountRole() == role).collect(Collectors.toList());
+            } else {
+                IItemsAccess<Group> groupsAccess = AccessFactory.getAccessFactory().GroupsAccess();
+                
+                Group group = groupsAccess.getItem(groupId);
+                result = new ArrayList(group.getStudents());
+            }
         
             JSONArray data = new JSONArray();
             data.addAll(result);
@@ -79,6 +95,18 @@ public class StaffApi extends HttpServlet {
             //TODO: validation
             
             Person person = new Person(name, mail, phone, role, password);
+            
+            Integer groupId = null;
+            try{
+                groupId = Integer.parseInt(request.getParameter("groupId"));
+            } catch(Exception ex){
+
+            }
+            if(groupId != null){
+                Group group = new Group();
+                group.setId(groupId);
+                person.setGroup(group);
+            }
             
             IItemsAccess<Person> personAccess = AccessFactory.getAccessFactory().PeopleAccess();
             personAccess.addOrUpdateItem(person);

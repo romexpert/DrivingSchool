@@ -1,6 +1,8 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -32,6 +35,9 @@ public class Group implements Serializable {
     @ManyToOne
     @JoinColumn(name = "teacher_id", nullable = false)
     private Person teacher;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "group")
+    private Set<Person> students = new HashSet<>();
     
     public Group(){ }
     
@@ -92,5 +98,13 @@ public class Group implements Serializable {
      */
     public void setTeacher(Person teacher) {
         this.teacher = teacher;
+    }
+    
+    public Set<Person> getStudents() {
+        return students;
+    }
+    
+    public void setStudents(Set<Person> students) {
+        this.students = students;
     }
 }

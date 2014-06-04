@@ -210,7 +210,8 @@
                 
                 $scope.save = function(){
                     staff.save(
-                        $scope.person
+                        { groupId: $routeParams.groupId }
+                        , $scope.person
                         , function(){
                             $location.path('/editGroup/' + $routeParams.groupId).replace();
                         }
