@@ -41,6 +41,7 @@ public class GroupApi extends HttpServlet {
                     groups.add(new Group("Группа 2"));
                     groups.add(new Group("Группа 3"));
                 //}
+                groupsAccess.addOrUpdateItemsList(groups);
             }
 
             JSONArray data = new JSONArray();
