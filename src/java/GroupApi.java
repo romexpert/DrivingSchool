@@ -34,13 +34,13 @@ public class GroupApi extends HttpServlet {
 
             if(groups.isEmpty()){
                 
-                IItemsAccess<Person> personAccess = AccessFactory.getAccessFactory().PeopleAccess();
-                Optional<Person> teacher = personAccess.getAllItems().stream().filter(person -> person.getAccountRole() == AccountRole.Teacher).findFirst();
-                if(teacher.isPresent()){
-                    groups.add(new Group("Группа 1", teacher.get()));
-                    groups.add(new Group("Группа 2", teacher.get()));
-                    groups.add(new Group("Группа 3", teacher.get()));
-                }
+                //IItemsAccess<Person> personAccess = AccessFactory.getAccessFactory().PeopleAccess();
+//                Optional<Person> instructor = personAccess.getAllItems().stream().filter(person -> person.getAccountRole() == AccountRole.Instructor).findFirst();
+                //if(instructor.isPresent()){
+                    groups.add(new Group("Группа 1"));
+                    groups.add(new Group("Группа 2"));
+                    groups.add(new Group("Группа 3"));
+                //}
             }
 
             JSONArray data = new JSONArray();
@@ -59,15 +59,15 @@ public class GroupApi extends HttpServlet {
             JSONObject json = (JSONObject)JSONValue.parse(request.getReader());
             
             String name = json.get("name").toString();
-            int teacherId = Integer.parseInt(json.get("teacherId").toString());
+//            int instructorId = Integer.parseInt(json.get("instructorId").toString());
             //TODO: validation
             
-            IItemsAccess<Person> personAccess = AccessFactory.getAccessFactory().PeopleAccess();
-            Person teacher = personAccess.getItem(teacherId);
-            if(teacher.getAccountRole() != AccountRole.Teacher)
-                throw new Exception("not a teacher");
+//            IItemsAccess<Person> personAccess = AccessFactory.getAccessFactory().PeopleAccess();
+//            Person instructor = personAccess.getItem(instructorId);
+//            if(instructor.getAccountRole() != AccountRole.Instructor)
+//                throw new Exception("not an instructor");
             
-            Group group = new Group(name, teacher);
+            Group group = new Group(name);
             
             IItemsAccess<Group> groupsAccess = AccessFactory.getAccessFactory().GroupsAccess();
             groupsAccess.addOrUpdateItem(group);

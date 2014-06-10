@@ -28,22 +28,18 @@ public class Group implements Serializable {
     @Column(name="IID")
     private int id;
     private String name;
-    /*
-    @Column(name = "teacher_id")
-    private int teacherId;*/
     
-    @ManyToOne
-    @JoinColumn(name = "teacher_id", nullable = false)
-    private Person teacher;
+//    @ManyToOne
+//    @JoinColumn(name = "instructor_id", nullable = false)
+//    private Person instructor;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "group")
     private Set<Person> students = new HashSet<>();
     
     public Group(){ }
     
-    public Group(String name, Person teacher){
+    public Group(String name){
         this.name = name;
-        this.teacher = teacher;
     }
     
     
@@ -62,7 +58,7 @@ public class Group implements Serializable {
     
     @Override
     public String toString(){
-        return String.format("{\"id\": %s, \"name\": \"%s\", \"teacherId\": %s}", getId(), getName(), getTeacher().getId());
+        return String.format("{\"id\": %s, \"name\": \"%s\"}", getId(), getName());
     }
 
     /**
@@ -79,26 +75,19 @@ public class Group implements Serializable {
         this.name = name;
     }
 
-    /**
-     * @param teacherId the teacherId to set
-     *//*
-    public void setTeacherId(int teacherId) {
-        this.teacherId = teacherId;
-    }*/
+//    /**
+//     * @return the teacher
+//     */
+//    public Person getTeacher() {
+//        return teacher;
+//    }
 
-    /**
-     * @return the teacher
-     */
-    public Person getTeacher() {
-        return teacher;
-    }
-
-    /**
-     * @param teacher the teacher to set
-     */
-    public void setTeacher(Person teacher) {
-        this.teacher = teacher;
-    }
+//    /**
+//     * @param teacher the teacher to set
+//     */
+//    public void setTeacher(Person teacher) {
+//        this.teacher = teacher;
+//    }
     
     public Set<Person> getStudents() {
         return students;

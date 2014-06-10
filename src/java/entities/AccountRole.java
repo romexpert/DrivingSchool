@@ -5,6 +5,6 @@ package entities;
  */
 public enum AccountRole {
     Student,
-    Teacher,
+    Instructor,
     Admin
 }

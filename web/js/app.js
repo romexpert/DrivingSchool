@@ -24,10 +24,10 @@
                     }
                 )
                 .when(
-                    '/teacherHome'
+                    '/instructorHome'
                     , {
-                        templateUrl: 'partials/teacherHome.html'
-                        , controller: 'TeacherHomeCtrl'
+                        templateUrl: 'partials/instructorHome.html'
+                        , controller: 'InstructorHomeCtrl'
                     }
                 )
                 .when(

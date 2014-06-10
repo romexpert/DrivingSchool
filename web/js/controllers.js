@@ -56,7 +56,7 @@
     );
     
     schoolControllers.controller(
-        'TeacherHomeCtrl'
+        'InstructorHomeCtrl'
         , [
             '$scope'
             , function($scope){
@@ -84,8 +84,8 @@
                     return tab === 'groups';
                 };
                 
-                $scope.getTeacherName = function(teacherId){
-                    return getPersonName(teacherId, $scope.staff);
+                $scope.getInstructorName = function(instructorId){
+                    return getPersonName(instructorId, $scope.staff);
                 };
                 
                 $scope.getPositionName = function(role){
@@ -115,7 +115,7 @@
             , function($scope, $window, $location, staff){
                 $scope.positions = $window.driftMan.positions;
                 $scope.person = {
-                    role: $scope.positions[1].value //Teacher
+                    role: $scope.positions[1].value //Instructor
                 };
                 $scope.$window = $window;
                 
@@ -138,10 +138,8 @@
             , '$window'
             , '$location'
             , 'groups'
-            , 'staff'
-            , function($scope, $window, $location, groups, staff){
-                $scope.group = { teacherId: null };
-                $scope.teachers = staff.query({role:$window.driftMan.roles.Teacher});
+            , function($scope, $window, $location, groups){
+                $scope.group = {  };
                 
                 $scope.save = function(){
                     console.log($scope.group);
@@ -172,16 +170,16 @@
                             $scope.group = value;
                     });
                 });
-                $scope.teachers = staff.query({role:$window.driftMan.roles.Teacher});
+                //$scope.teachers = staff.query({role:$window.driftMan.roles.Teacher});
                 $scope.students = staff.query({role:$window.driftMan.roles.Student, groupId:$routeParams.groupId});
                 
-                $scope.getTeacherName = function(teacherId){
-                    return getPersonName(teacherId, $scope.teachers);
-                };
+//                $scope.getTeacherName = function(teacherId){
+//                    return getPersonName(teacherId, $scope.teachers);
+//                };
                 
                 $scope.addStudent = function(){
                     $location.path('/addStudent/' + $routeParams.groupId)
-                }
+                };
             }
         ]
     );
@@ -236,7 +234,7 @@
                     currentCredIndex: 0
                     , credArray: [
                         { email: 'student@driftman.ru', password: 'student123' }
-                        , { email: 'teacher@driftman.ru', password: 'teacher123' }
+                        , { email: 'instructor@driftman.ru', password: 'instructor123' }
                         , { email: 'admin@driftman.ru', password: 'admin123' }
                     ]
                     , nextCredentials: function(index){
@@ -268,8 +266,8 @@
                             currentUser.set(data.name, data.role);
                             
                             var newPath = '/studentHome';
-                            if(data.role === $window.driftMan.roles.Teacher)
-                                newPath = '/teacherHome';
+                            if(data.role === $window.driftMan.roles.Instructor)
+                                newPath = '/instructorHome';
                             else if(data.role === $window.driftMan.roles.Admin)
                                 newPath = '/adminHome';
                                 

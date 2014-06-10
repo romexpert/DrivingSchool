@@ -10,8 +10,8 @@ public class Account {
     //TODO:remove
     public static UUID _adminGuid = UUID.fromString("8BA6B85D-21B5-4AFC-B8B3-DF9988F42E01");
     private static String _adminMail = "admin@driftman.ru";
-    public static UUID _teacherGuid = UUID.fromString("2D690119-FA6E-4FEC-91C3-D0213DA38646");
-    private static String _teacherMail = "teacher@driftman.ru";
+    public static UUID _instructorGuid = UUID.fromString("2D690119-FA6E-4FEC-91C3-D0213DA38646");
+    private static String _instructorMail = "instructor@driftman.ru";
     public static UUID _studentGuid = UUID.fromString("30505A4C-7742-4E1B-AC77-920E7BEAB488");
     private static String _studentMail = "student@driftman.ru";
     //TODO:end remove
@@ -46,8 +46,8 @@ public class Account {
         if(_studentMail.equals(email) && "student123".equals(password)){
             sessionId = _studentGuid;
         }
-        else if(_teacherMail.equals(email) && "teacher123".equals(password)){
-            sessionId = _teacherGuid;
+        else if(_instructorMail.equals(email) && "instructor123".equals(password)){
+            sessionId = _instructorGuid;
         }
         else if(_adminMail.equals(email) && "admin123".equals(password)){
             sessionId = _adminGuid;
@@ -68,8 +68,8 @@ public class Account {
         
         if(_studentGuid.equals(sessionId))
             email = _studentMail;
-        else if (_teacherGuid.equals(sessionId))
-            email = _teacherMail;
+        else if (_instructorGuid.equals(sessionId))
+            email = _instructorMail;
         else if(_adminGuid.equals(sessionId))
             email = _adminMail;
         else
@@ -89,9 +89,9 @@ public class Account {
             account._role = AccountRole.Student;
             account._name = "Андрюша";
         }
-        else if(_teacherMail.equals(email)){
-            account._role = AccountRole.Teacher;
-            account._name = "Учитель Андрюша";
+        else if(_instructorMail.equals(email)){
+            account._role = AccountRole.Instructor;
+            account._name = "Инструктор Андрюша";
         }
         else if(_adminMail.equals(email)){
             account._role = AccountRole.Admin;

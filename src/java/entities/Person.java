@@ -38,8 +38,8 @@ public class Person implements Serializable {
     @Column(name = "AccountRole")
     private AccountRole accountRole;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "teacher")
-    private Set<Group> groups = new HashSet<>();
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "instructor")
+//    private Set<Group> groups = new HashSet<>();
     
     @ManyToOne
     @JoinColumn(name = "group_id", nullable = true)
@@ -127,19 +127,19 @@ public class Person implements Serializable {
         this.accountRole = accountRole;
     }
 
-    /**
-     * @return the groups
-     */
-    public Set<Group> getGroups() {
-        return groups;
-    }
-
-    /**
-     * @param groups the groups to set
-     */
-    public void setGroups(Set<Group> groups) {
-        this.groups = groups;
-    }
+//    /**
+//     * @return the groups
+//     */
+//    public Set<Group> getGroups() {
+//        return groups;
+//    }
+//
+//    /**
+//     * @param groups the groups to set
+//     */
+//    public void setGroups(Set<Group> groups) {
+//        this.groups = groups;
+//    }
     
     public Group getGroup() {
         return group;

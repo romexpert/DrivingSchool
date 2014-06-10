@@ -21,7 +21,7 @@ import org.json.simple.JSONValue;
  */
 public class StaffApi extends HttpServlet {
 
-    private static final EnumSet<AccountRole> _staffRoles = EnumSet.of(AccountRole.Admin, AccountRole.Teacher);
+    private static final EnumSet<AccountRole> _staffRoles = EnumSet.of(AccountRole.Admin, AccountRole.Instructor);
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -47,9 +47,9 @@ public class StaffApi extends HttpServlet {
             if(staff.size() < 1) {
                 staff.add(new Person("Админ Андрюша", "admin@driftman.ru", "1 2345678", AccountRole.Admin, "admin@driftman.ru"));
                 
-                staff.add(new Person("Учитель Андрюша", "teacher@driftman.ru", "2 2345678", AccountRole.Teacher, "teacher123"));
-                staff.add(new Person("Преподаватель 2", "teacher2@driftman.ru", "3 2345678", AccountRole.Teacher, "teacher2123"));
-                staff.add(new Person("Преподаватель 3", "teacher3@driftman.ru", "4 2345678", AccountRole.Teacher, "teacher3123"));
+                staff.add(new Person("Инструктор Андрюша", "instructor@driftman.ru", "2 2345678", AccountRole.Instructor, "instructor123"));
+                staff.add(new Person("Инструктор 2", "instructor@driftman.ru", "3 2345678", AccountRole.Instructor, "instructor2123"));
+                staff.add(new Person("Инструктор 3", "instructor@driftman.ru", "4 2345678", AccountRole.Instructor, "instructor3123"));
         
                 staff.add(new Person("Андрюша", "student@driftman.ru", "5 2345678", AccountRole.Student, "student123"));
                 staff.add(new Person("Студент 2", "student2@driftman.ru", "6 2345678", AccountRole.Student, "student2123"));

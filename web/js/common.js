@@ -2,7 +2,7 @@ var driftMan = {};
 
 driftMan.roles = {
     Student: 'Student'
-    , Teacher: 'Teacher'
+    , Instructor: 'Instructor'
     , Admin: 'Admin'
 };
 
@@ -10,7 +10,7 @@ driftMan.positions = [{
         text: 'Администратор'
         , value: driftMan.roles.Admin
     }, {
-        text: 'Учитель'
-        , value: driftMan.roles.Teacher
+        text: 'Инструктор'
+        , value: driftMan.roles.Instructor
     }
 ];
