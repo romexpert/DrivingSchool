@@ -88,10 +88,23 @@ public class StaffApi extends HttpServlet {
             } catch(Exception ex){
 
             }
+            Integer instructorId = null;
+            try{
+                instructorId = Integer.parseInt(json.get("instructorId").toString());
+            } catch(Exception ex){
+
+            }
+            
             if(groupId != null){
                 Group group = new Group();
                 group.setId(groupId);
                 person.setGroup(group);
+            }
+            
+            if(instructorId != null){
+                Person instructor = new Person();
+                instructor.setId(instructorId);
+                person.setInstructor(instructor);
             }
             
             IItemsAccess<Person> personAccess = AccessFactory.getAccessFactory().PeopleAccess();

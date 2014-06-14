@@ -170,12 +170,12 @@
                             $scope.group = value;
                     });
                 });
-                //$scope.teachers = staff.query({role:$window.driftMan.roles.Teacher});
+                $scope.instructors = staff.query({role:$window.driftMan.roles.Instructor});
                 $scope.students = staff.query({role:$window.driftMan.roles.Student, groupId:$routeParams.groupId});
                 
-//                $scope.getTeacherName = function(teacherId){
-//                    return getPersonName(teacherId, $scope.teachers);
-//                };
+                $scope.getInstructorsName = function(instructorId){
+                    return getPersonName(instructorId, $scope.instructors);
+                };
                 
                 $scope.addStudent = function(){
                     $location.path('/addStudent/' + $routeParams.groupId)
@@ -198,6 +198,7 @@
                 $scope.person = {
                     role: $window.driftMan.roles.Student
                 };
+                $scope.instructors = staff.query({role:$window.driftMan.roles.Instructor});
                 
                 groups.query(function(data){
                     angular.forEach(data, function(value){

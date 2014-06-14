@@ -29,6 +29,14 @@
             <input type="password" class="form-control" id="password" placeholder="Введите пароль" ng-model="person.password" required>
         </div>
     </div>
+    <div class="form-group" ng-if="person.role == $window.driftMan.roles.Student">
+        <label for="instructor" class="col-sm-2 control-label">Инструктор</label>
+        <div class="col-sm-10">
+            <select id="instructor" class="form-control" ng-model="person.instructorId" ng-options="instructor.id as instructor.name for instructor in instructors" required>
+                <option value="">--- Выберите Инструктора ---</option>
+            </select>
+        </div>
+    </div>
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
             <button type="submit" class="btn btn-default">Создать</button>

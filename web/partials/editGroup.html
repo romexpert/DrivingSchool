@@ -3,8 +3,6 @@
         <dl class="dl-horizontal">
             <dt>Название</dt>
             <dd>{{group.name}}</dd>
-<!--            <dt>Преподаватель</dt>
-            <dd>{{getTeacherName(group.teacherId)}}</dd>-->
         </dl>
     </div>
 </div>
@@ -20,12 +18,14 @@
                 <tr>
                     <th>Имя</th>
                     <th>Телефон</th>
+                    <th>Инструктор</th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="employee in students">
-                    <td>{{employee.name}}</td>
-                    <td>{{employee.phone}}</td>
+                <tr ng-repeat="student in students">
+                    <td>{{student.name}}</td>
+                    <td>{{student.phone}}</td>
+                    <td>{{getInstructorsName(student.instructorId)}}</td>
                 </tr>
             </tbody>
         </table>
