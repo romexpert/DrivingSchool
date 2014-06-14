@@ -41,6 +41,14 @@ public class Person implements Serializable {
 //    @OneToMany(cascade = CascadeType.ALL, mappedBy = "instructor")
 //    private Set<Group> groups = new HashSet<>();
     
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "instructor")
+    private Set<Person> students = new HashSet<>();
+    
+    @ManyToOne
+    @JoinColumn(name = "instructor_id")
+    private Person instructor;
+    
+    
     @ManyToOne
     @JoinColumn(name = "group_id", nullable = true)
     private Group group;
@@ -65,17 +73,20 @@ public class Person implements Serializable {
         
     }
     
-    public Person(String name, String email, String phone, AccountRole role, String passwordHash){
+    public Person(String name, String email, String phone, AccountRole role, String passwordHash, Person instructor){
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.accountRole = role;
         this.passwordHash = passwordHash;
+        setInstructor(instructor);
     }
     
     @Override
     public String toString(){
-        return String.format("{\"id\": %1$s,\"name\": \"%2$s\", \"email\": \"%3$s\", \"phone\": \"%4$s\", \"role\": \"%5$s\"}", getId(), getName(), getEmail(), getPhone(), getAccountRole());
+        Person instructor = getInstructor();
+        Integer instructorId = instructor == null ? null : instructor.id;
+        return String.format("{\"id\": %1$s,\"name\": \"%2$s\", \"email\": \"%3$s\", \"phone\": \"%4$s\", \"role\": \"%5$s\", \"instructorId\": %6$s}", getId(), getName(), getEmail(), getPhone(), getAccountRole(), instructorId);
     }
 
     /**
@@ -140,6 +151,22 @@ public class Person implements Serializable {
 //    public void setGroups(Set<Group> groups) {
 //        this.groups = groups;
 //    }
+    
+    public Person getInstructor() {
+        return instructor;
+    }
+
+    public void setInstructor(Person instructor) {
+        this.instructor = instructor;
+    }
+    
+    public Set<Person> getStudents() {
+        return students;
+    }
+    
+    public void setStudents(Set<Person> students) {
+        this.students = students;
+    }
     
     public Group getGroup() {
         return group;

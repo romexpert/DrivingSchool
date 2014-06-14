@@ -5,9 +5,10 @@
     <property name="hibernate.dialect">org.hibernate.dialect.DerbyDialect</property>
     <property name="hibernate.connection.driver_class">org.apache.derby.jdbc.ClientDriver</property>
     <property name="hibernate.connection.url">jdbc:derby://localhost:1527/DrivingScool;create=true;</property>
-    <property name="hibernate.connection.username">Driver</property>
+    <property name="hibernate.connection.username">APP</property>
     <property name="hibernate.connection.password">Driver123</property>
-    <property name="hibernate.hbm2ddl.auto">update</property>
+    <property name="hibernate.hbm2ddl.auto">create</property>
+    <property name="hibernate.show_sql">true</property>
     <mapping class="entities.Lecture"/>
     <mapping class="entities.Person"/>
     <mapping class="entities.Group"/>

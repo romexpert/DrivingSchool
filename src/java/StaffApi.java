@@ -44,20 +44,6 @@ public class StaffApi extends HttpServlet {
         List<Person> staff;
         try {
             staff = personAccess.getAllItems();
-            if(staff.size() < 1) {
-                staff.add(new Person("Админ Андрюша", "admin@driftman.ru", "1 2345678", AccountRole.Admin, "admin@driftman.ru"));
-                
-                staff.add(new Person("Инструктор Андрюша", "instructor@driftman.ru", "2 2345678", AccountRole.Instructor, "instructor123"));
-                staff.add(new Person("Инструктор 2", "instructor@driftman.ru", "3 2345678", AccountRole.Instructor, "instructor2123"));
-                staff.add(new Person("Инструктор 3", "instructor@driftman.ru", "4 2345678", AccountRole.Instructor, "instructor3123"));
-        
-                staff.add(new Person("Андрюша", "student@driftman.ru", "5 2345678", AccountRole.Student, "student123"));
-                staff.add(new Person("Студент 2", "student2@driftman.ru", "6 2345678", AccountRole.Student, "student2123"));
-                staff.add(new Person("Студент 3", "student3@driftman.ru", "7 2345678", AccountRole.Student, "student3123"));
-                
-                
-                personAccess.addOrUpdateItemsList(staff);
-            }
             
             List<Person> result;
             
@@ -94,7 +80,7 @@ public class StaffApi extends HttpServlet {
             String password = json.get("password").toString();
             //TODO: validation
             
-            Person person = new Person(name, mail, phone, role, password);
+            Person person = new Person(name, mail, phone, role, password, null);
             
             Integer groupId = null;
             try{

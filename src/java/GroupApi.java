@@ -6,7 +6,6 @@ import entities.util.AccessFactory;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Optional;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -31,18 +30,6 @@ public class GroupApi extends HttpServlet {
         try{
             IItemsAccess<Group> groupsAccess = AccessFactory.getAccessFactory().GroupsAccess();
             List<Group> groups = groupsAccess.getAllItems();
-
-            if(groups.isEmpty()){
-                
-                //IItemsAccess<Person> personAccess = AccessFactory.getAccessFactory().PeopleAccess();
-//                Optional<Person> instructor = personAccess.getAllItems().stream().filter(person -> person.getAccountRole() == AccountRole.Instructor).findFirst();
-                //if(instructor.isPresent()){
-                    groups.add(new Group("Группа 1"));
-                    groups.add(new Group("Группа 2"));
-                    groups.add(new Group("Группа 3"));
-                //}
-                groupsAccess.addOrUpdateItemsList(groups);
-            }
 
             JSONArray data = new JSONArray();
             data.addAll(groups);
