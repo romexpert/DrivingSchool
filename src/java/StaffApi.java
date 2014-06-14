@@ -45,10 +45,12 @@ public class StaffApi extends HttpServlet {
         try {
             staff = personAccess.getAllItems();
             
-            List<Person> result;
+            List<Person> result = new ArrayList();
             
             if(groupId == null){
-                result = staff.stream().filter(person -> (role == null && _staffRoles.contains(person.getAccountRole())) || person.getAccountRole() == role).collect(Collectors.toList());
+                for(Person item : staff)
+                    if((role == null && _staffRoles.contains(item.getAccountRole())) || item.getAccountRole() == role)
+                        result.add(item);
             } else {
                 IItemsAccess<Group> groupsAccess = AccessFactory.getAccessFactory().GroupsAccess();
                 

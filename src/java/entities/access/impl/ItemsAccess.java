@@ -58,12 +58,14 @@ public abstract class ItemsAccess<T> implements IItemsAccess<T>{
     }
 
     @Override
-    public void addOrUpdateItemsList(List<T> lectures) throws SQLException {
+    public void addOrUpdateItemsList(List<T> items) throws SQLException {
         Transaction tran = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
         tran = session.beginTransaction();
         try {
-            lectures.forEach(a->session.saveOrUpdate(a));
+            for(T item : items)
+                session.saveOrUpdate(item);
+            
             tran.commit();
         }
         catch(Exception ex) {
