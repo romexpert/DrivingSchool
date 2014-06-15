@@ -22,7 +22,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="student in students">
+                <tr ng-repeat="student in students | orderBy:'name'">
                     <td>{{student.name}}</td>
                     <td>{{student.phone}}</td>
                     <td>{{getInstructorsName(student.instructorId)}}</td>
