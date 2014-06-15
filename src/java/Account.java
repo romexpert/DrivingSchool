@@ -34,6 +34,11 @@ public class Account {
         return _role;
     }
     
+    //TODO
+    public int getId(){
+        return 2;
+    }
+    
     
     private Account(){ }
     

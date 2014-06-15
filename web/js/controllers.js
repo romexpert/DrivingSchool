@@ -60,10 +60,11 @@
         , [
             '$scope'
             , '$window'
+            , 'currentUser'
             , 'staff'
-            , function($scope, $window, staff){
+            , function($scope, $window, currentUser, staff){
                 //TODO
-                $scope.students = staff.query({role:$window.driftMan.roles.Student,instructorId:1});
+                $scope.students = staff.query({role:$window.driftMan.roles.Student,instructorId:currentUser.id});
             }
         ]
     );
@@ -267,7 +268,7 @@
                         .$promise
                         .then(function(data){
                             //TODO: form server
-                            currentUser.set(data.name, data.role);
+                            currentUser.set(data.id, data.name, data.role);
                             
                             var newPath = '/studentHome';
                             if(data.role === $window.driftMan.roles.Instructor)

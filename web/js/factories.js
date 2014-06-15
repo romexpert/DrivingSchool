@@ -85,7 +85,8 @@
                     role: null
                     , isAuthorized: false
 
-                    , set: function(name, role){
+                    , set: function(id, name, role){
+                        this.id = id;
                         this.name = name;
                         this.role = role;
                         this.isAuthorized = true;
@@ -96,7 +97,7 @@
                         catch(err){ }
                     }
                     , reset: function(){
-                        this.set(null, null);
+                        this.set(null, null, null);
                         this.isAuthorized = false;
                         
                         try{

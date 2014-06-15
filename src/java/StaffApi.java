@@ -37,6 +37,12 @@ public class StaffApi extends HttpServlet {
         } catch(Exception ex){
             
         }
+        Integer instructorId = null;
+        try{
+            instructorId = Integer.parseInt(request.getParameter("instructorId"));
+        } catch(Exception ex){
+            
+        }
         
         String roleParam = request.getParameter("role");
         AccountRole role = roleParam != null ? AccountRole.valueOf(roleParam) : null;
@@ -45,8 +51,11 @@ public class StaffApi extends HttpServlet {
             
             List<Person> result = new ArrayList();
             
+            if(instructorId != null){
+                result.addAll(AccessFactory.PeopleAccess().getItem(instructorId).getStudents());
+            }
             //Get staff
-            if(groupId == null){
+            else if(groupId == null){
                 for(Person item : staff)
                     if((role == null && _staffRoles.contains(item.getAccountRole())) || item.getAccountRole() == role)
                         result.add(item);

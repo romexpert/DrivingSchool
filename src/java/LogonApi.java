@@ -46,6 +46,7 @@ public class LogonApi extends HttpServlet {
         
         data.put("name", account.getName());
         data.put("role", account.getRole().toString());
+        data.put("id", account.getId());
 
         data.writeJSONString(response.getWriter());
     }

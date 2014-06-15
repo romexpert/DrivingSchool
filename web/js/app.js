@@ -76,12 +76,21 @@
                     redirectTo: '/logon'
                 });
             
-            $httpProvider.responseInterceptors.push(['$q', '$location', 'currentUser', function($q, $location, currentUser) {
+            $httpProvider.responseInterceptors.push(['$q', '$location', 'currentUser', 'errorFactory', function($q, $location, currentUser, errorFactory) {
 		return function(promise) {
                     return promise.catch(function(response) {
                             if (response.status === 403) {
                                 currentUser.reset();
                                 $location.path('/logon');
+                            } else {
+                                var errorMessage = response.statusText;
+                                
+                                try{
+                                    errorMessage = (/<pre>.*<\/pre>/g).exec(response.data)[0];
+                                    errorMessage = errorMessage.substring(5, errorMessage.length - 6);
+                                    errorMessage = $("<div/>").html(errorMessage).text();
+                                } catch(error){ }
+                                errorFactory.addError(errorMessage || response.statusText);
                             }
                             return $q.reject(response);
                     });
@@ -103,7 +112,7 @@
                         try{
                             var user = angular.fromJson($window.localStorage.getItem('currentUser'));
                             if(user && user.isAuthorized){
-                                currentUser.set(user.name, user.role);
+                                currentUser.set(user.id, user.name, user.role);
                                 return;
                             }
                         }
