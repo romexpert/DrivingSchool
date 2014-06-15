@@ -28,8 +28,7 @@ public class GroupApi extends HttpServlet {
         }
         
         try{
-            IItemsAccess<Group> groupsAccess = AccessFactory.getAccessFactory().GroupsAccess();
-            List<Group> groups = groupsAccess.getAllItems();
+            List<Group> groups = AccessFactory.GroupsAccess().getAllItems();
 
             JSONArray data = new JSONArray();
             data.addAll(groups);
@@ -44,24 +43,13 @@ public class GroupApi extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            JSONObject json = (JSONObject)JSONValue.parse(request.getReader());
-            
+            JSONObject json = (JSONObject)JSONValue.parse(request.getReader());            
             String name = json.get("name").toString();
-//            int instructorId = Integer.parseInt(json.get("instructorId").toString());
-            //TODO: validation
             
-//            IItemsAccess<Person> personAccess = AccessFactory.getAccessFactory().PeopleAccess();
-//            Person instructor = personAccess.getItem(instructorId);
-//            if(instructor.getAccountRole() != AccountRole.Instructor)
-//                throw new Exception("not an instructor");
-            
-            Group group = new Group(name);
-            
-            IItemsAccess<Group> groupsAccess = AccessFactory.getAccessFactory().GroupsAccess();
-            groupsAccess.addOrUpdateItem(group);
+            Group group = new Group(name);            
+            AccessFactory.GroupsAccess().addOrUpdateItem(group);
             
             JSONObject result = new JSONObject();
-            //TODO
             result.put("id", group.getId());
             result.writeJSONString(response.getWriter());
         } catch(Exception ex) {

@@ -27,13 +27,12 @@ public class LectureApi extends HttpServlet {
         
         //TODO
         JSONArray data = new JSONArray();
-        LecturesAccess access = (LecturesAccess)AccessFactory.getAccessFactory().LecturesAccess();
         try {
             for(int i = 1; i < 13; i++) {
-                if(access.getByNumber(i) == null)
-                    access.addOrUpdateItem(new Lecture(i, "Лекция " + String.valueOf(i), "Не пройдена"));
+                if(AccessFactory.LecturesAccess().getByNumber(i) == null)
+                    AccessFactory.LecturesAccess().addOrUpdateItem(new Lecture(i, "Лекция " + String.valueOf(i), "Не пройдена"));
             }
-            data.addAll(access.getAllItems());
+            data.addAll(AccessFactory.LecturesAccess().getAllItems());
         }
         catch(SQLException ex) {
             ex.printStackTrace();

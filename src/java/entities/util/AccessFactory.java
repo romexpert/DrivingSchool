@@ -19,34 +19,24 @@ import entities.access.impl.PeopleAccess;
  * @author Екатерина
  */
 public class AccessFactory {
-    private static IItemsAccess<Lecture> lecturesAccess = null;
-    private static IItemsAccess<Person> peopleAccess = null;
-    private static IItemsAccess<Group> groupsAccess = null;
+    private static LecturesAccess lecturesAccess = null;
+    private static PeopleAccess peopleAccess = null;
+    private static GroupsAccess groupsAccess = null;
     private static AccessFactory accessFactory = null;
     
-    private AccessFactory() {
-        
-    }
-    
-    public static synchronized AccessFactory getAccessFactory() {
-        if(accessFactory == null)
-            accessFactory = new AccessFactory();
-        return accessFactory;
-    }
-    
-    public IItemsAccess LecturesAccess() {
+    public static LecturesAccess LecturesAccess() {
         if(lecturesAccess == null)
             lecturesAccess = new LecturesAccess();
         return lecturesAccess;
     }
     
-    public IItemsAccess<Person> PeopleAccess() {
+    public static PeopleAccess PeopleAccess() {
         if(peopleAccess == null)
             peopleAccess = new PeopleAccess();
         return peopleAccess;
     }
     
-    public IItemsAccess<Group> GroupsAccess() {
+    public static GroupsAccess GroupsAccess() {
         if(groupsAccess == null)
             groupsAccess = new GroupsAccess();
         return groupsAccess;

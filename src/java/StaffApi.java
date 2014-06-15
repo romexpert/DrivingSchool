@@ -26,7 +26,7 @@ public class StaffApi extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        if(!RoleHelper.IsInRole(request, response, AccountRole.Admin)){
+        if(!RoleHelper.IsInRole(request, response, _staffRoles)){
             return;
         }
         
@@ -40,21 +40,19 @@ public class StaffApi extends HttpServlet {
         
         String roleParam = request.getParameter("role");
         AccountRole role = roleParam != null ? AccountRole.valueOf(roleParam) : null;
-        IItemsAccess<Person> personAccess = AccessFactory.getAccessFactory().PeopleAccess();
-        List<Person> staff;
         try {
-            staff = personAccess.getAllItems();
+            List<Person> staff = AccessFactory.PeopleAccess().getAllItems();
             
             List<Person> result = new ArrayList();
             
+            //Get staff
             if(groupId == null){
                 for(Person item : staff)
                     if((role == null && _staffRoles.contains(item.getAccountRole())) || item.getAccountRole() == role)
                         result.add(item);
+            //Get group students
             } else {
-                IItemsAccess<Group> groupsAccess = AccessFactory.getAccessFactory().GroupsAccess();
-                
-                Group group = groupsAccess.getItem(groupId);
+                Group group = AccessFactory.GroupsAccess().getItem(groupId);
                 result = new ArrayList(group.getStudents());
             }
         
@@ -109,8 +107,7 @@ public class StaffApi extends HttpServlet {
                 person.setInstructor(instructor);
             }
             
-            IItemsAccess<Person> personAccess = AccessFactory.getAccessFactory().PeopleAccess();
-            personAccess.addOrUpdateItem(person);
+            AccessFactory.PeopleAccess().addOrUpdateItem(person);
         } catch(Exception ex) {
             throw new IOException("Error parsing JSON request string" + ex.toString());
         }

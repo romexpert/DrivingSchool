@@ -59,8 +59,11 @@
         'InstructorHomeCtrl'
         , [
             '$scope'
-            , function($scope){
-                
+            , '$window'
+            , 'staff'
+            , function($scope, $window, staff){
+                //TODO
+                $scope.students = staff.query({role:$window.driftMan.roles.Student,instructorId:1});
             }
         ]
     );
