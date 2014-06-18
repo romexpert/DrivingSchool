@@ -1,12 +1,10 @@
 import entities.AccountRole;
 import entities.Group;
 import entities.Person;
-import entities.access.IItemsAccess;
 import entities.util.AccessFactory;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.*;
-import java.util.stream.*;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
