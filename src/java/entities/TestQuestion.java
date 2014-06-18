@@ -33,9 +33,16 @@ public class TestQuestion implements Serializable {
     @Column(name = "IID")
     private int id;
     
+    @Column(name = "question", length = 8000)
     private String question;
+    
     private String image;
+    
+    @Column(name = "correct_result")
     private int correctResult;
+    
+    @Column(name = "comment", length = 8000)
+    private String comment;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "question")
     private Set<TestQuestionVariant> variants = new HashSet<>();
@@ -130,5 +137,19 @@ public class TestQuestion implements Serializable {
      */
     public void setLecture(Lecture lecture) {
         this.lecture = lecture;
+    }
+
+    /**
+     * @return the comment
+     */
+    public String getComment() {
+        return comment;
+    }
+
+    /**
+     * @param comment the comment to set
+     */
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 }

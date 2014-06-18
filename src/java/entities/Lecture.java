@@ -33,6 +33,8 @@ public class Lecture implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "lecture")
     private Set<TestQuestion> questions = new HashSet<TestQuestion>();
     
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "lecture")
+    private Set<LectureStatus> lectureStats = new HashSet<>();
     
     public Lecture() {
     }
@@ -109,5 +111,12 @@ public class Lecture implements Serializable {
      */
     public void setQuestions(Set<TestQuestion> questions) {
         this.questions = questions;
+    }
+
+    /**
+     * @return the lectureStats
+     */
+    public Set<LectureStatus> getLectureStats() {
+        return lectureStats;
     }
 }
