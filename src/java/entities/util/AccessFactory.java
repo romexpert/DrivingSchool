@@ -54,7 +54,7 @@ public class AccessFactory {
         if(lectureStatusAccess == null)
             lectureStatusAccess = new LectureStatusAccess();
         return lectureStatusAccess;
-
+    }
     public static SessionAccess SessionAccess() {
         if(sessionAccess == null)
             sessionAccess = new SessionAccess();
