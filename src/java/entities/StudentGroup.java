@@ -8,9 +8,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
@@ -21,7 +18,7 @@ import org.hibernate.annotations.GenericGenerator;
  */
 @Entity
 @Table(name="Groups")
-public class Group implements Serializable {
+public class StudentGroup implements Serializable {
     @Id
     @GeneratedValue(generator="increment")
     @GenericGenerator(name="increment", strategy="increment")
@@ -36,9 +33,9 @@ public class Group implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "group")
     private Set<Person> students = new HashSet<>();
     
-    public Group(){ }
+    public StudentGroup(){ }
     
-    public Group(String name){
+    public StudentGroup(String name){
         this.name = name;
     }
     
@@ -74,20 +71,6 @@ public class Group implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
-
-//    /**
-//     * @return the teacher
-//     */
-//    public Person getTeacher() {
-//        return teacher;
-//    }
-
-//    /**
-//     * @param teacher the teacher to set
-//     */
-//    public void setTeacher(Person teacher) {
-//        this.teacher = teacher;
-//    }
     
     public Set<Person> getStudents() {
         return students;

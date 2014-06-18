@@ -1,5 +1,5 @@
 import entities.AccountRole;
-import entities.Group;
+import entities.StudentGroup;
 import entities.Person;
 import entities.util.AccessFactory;
 import java.io.IOException;
@@ -59,7 +59,7 @@ public class StaffApi extends HttpServlet {
                         result.add(item);
             //Get group students
             } else {
-                Group group = AccessFactory.GroupsAccess().getItem(groupId);
+                StudentGroup group = AccessFactory.GroupsAccess().getItem(groupId);
                 result = new ArrayList(group.getStudents());
             }
         
@@ -103,7 +103,7 @@ public class StaffApi extends HttpServlet {
             }
             
             if(groupId != null){
-                Group group = new Group();
+                StudentGroup group = new StudentGroup();
                 group.setId(groupId);
                 person.setGroup(group);
             }

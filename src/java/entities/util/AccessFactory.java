@@ -6,13 +6,10 @@
 
 package entities.util;
 
-import entities.Group;
-import entities.Lecture;
-import entities.Person;
-import entities.access.IItemsAccess;
 import entities.access.impl.GroupsAccess;
 import entities.access.impl.LecturesAccess;
 import entities.access.impl.PeopleAccess;
+import entities.access.impl.TestsAccess;
 
 /**
  *
@@ -22,6 +19,7 @@ public class AccessFactory {
     private static LecturesAccess lecturesAccess = null;
     private static PeopleAccess peopleAccess = null;
     private static GroupsAccess groupsAccess = null;
+    private static TestsAccess testsAccess = null;
     private static AccessFactory accessFactory = null;
     
     public static LecturesAccess LecturesAccess() {
@@ -40,5 +38,11 @@ public class AccessFactory {
         if(groupsAccess == null)
             groupsAccess = new GroupsAccess();
         return groupsAccess;
+    }
+    
+    public static TestsAccess TestsAccess() {
+        if(testsAccess == null)
+            testsAccess = new TestsAccess();
+        return testsAccess;
     }
 }

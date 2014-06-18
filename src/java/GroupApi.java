@@ -1,5 +1,5 @@
 import entities.AccountRole;
-import entities.Group;
+import entities.StudentGroup;
 import entities.Person;
 import entities.access.IItemsAccess;
 import entities.util.AccessFactory;
@@ -28,7 +28,7 @@ public class GroupApi extends HttpServlet {
         }
         
         try{
-            List<Group> groups = AccessFactory.GroupsAccess().getAllItems();
+            List<StudentGroup> groups = AccessFactory.GroupsAccess().getAllItems();
 
             JSONArray data = new JSONArray();
             data.addAll(groups);
@@ -46,7 +46,7 @@ public class GroupApi extends HttpServlet {
             JSONObject json = (JSONObject)JSONValue.parse(request.getReader());            
             String name = json.get("name").toString();
             
-            Group group = new Group(name);            
+            StudentGroup group = new StudentGroup(name);            
             AccessFactory.GroupsAccess().addOrUpdateItem(group);
             
             JSONObject result = new JSONObject();

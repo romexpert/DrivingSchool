@@ -51,7 +51,7 @@ public class Person implements Serializable {
     
     @ManyToOne
     @JoinColumn(name = "group_id", nullable = true)
-    private Group group;
+    private StudentGroup group;
     
     public int getId(){
         return id;
@@ -168,11 +168,11 @@ public class Person implements Serializable {
         this.students = students;
     }
     
-    public Group getGroup() {
+    public StudentGroup getGroup() {
         return group;
     }
 
-    public void setGroup(Group group) {
+    public void setGroup(StudentGroup group) {
         this.group = group;
     }
 }

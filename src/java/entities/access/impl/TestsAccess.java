@@ -6,7 +6,7 @@
 
 package entities.access.impl;
 
-import entities.StudentGroup;
+import entities.TestQuestion;
 import entities.util.HibernateUtil;
 import java.sql.SQLException;
 import java.util.List;
@@ -16,28 +16,28 @@ import org.hibernate.Session;
  *
  * @author Ivan
  */
-public class GroupsAccess extends ItemsAccess<StudentGroup> {
+public class TestsAccess extends ItemsAccess<TestQuestion> {
+
     @Override
-    public StudentGroup getItem(int id) throws SQLException {
+    public TestQuestion getItem(int id) throws SQLException {
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
-            StudentGroup group = (StudentGroup)session.load(StudentGroup.class, id);
-            group.getStudents().toArray();
-            return group;
+            return (TestQuestion)session.get(TestQuestion.class, id);
+        }
+        finally {
+            session.close();
+        }        
+    }
+
+    @Override
+    public List<TestQuestion> getAllItems() throws SQLException {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            return session.createCriteria(TestQuestion.class).list();
         }
         finally {
             session.close();
         }
     }
     
-    @Override
-    public List<StudentGroup> getAllItems() throws SQLException {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        try {
-            return session.createCriteria(StudentGroup.class).list();
-        }
-        finally {
-            session.close();
-        }
-    }
 }

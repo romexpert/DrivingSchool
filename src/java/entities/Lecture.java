@@ -1,10 +1,14 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -16,11 +20,19 @@ import org.hibernate.annotations.GenericGenerator;
 @Table(name="Lectures")
 public class Lecture implements Serializable {
     
+    @Id
+    @GenericGenerator(name="increment", strategy="increment")
+    @GeneratedValue(generator="increment")
+    @Column(name="IID")
     private int iid;
     
     private int number;
     private String name;
     private String status;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "lecture")
+    private Set<TestQuestion> questions = new HashSet<TestQuestion>();
+    
     
     public Lecture() {
     }
@@ -53,10 +65,6 @@ public class Lecture implements Serializable {
     /**
      * @return the iid
      */
-    @Id
-    @GeneratedValue(generator="increment")
-    @GenericGenerator(name="increment", strategy="increment")
-    @Column(name="IID")
     public int getIid() {
         return iid;
     }
@@ -87,5 +95,19 @@ public class Lecture implements Serializable {
      */
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    /**
+     * @return the questions
+     */
+    public Set<TestQuestion> getQuestions() {
+        return questions;
+    }
+
+    /**
+     * @param questions the questions to set
+     */
+    public void setQuestions(Set<TestQuestion> questions) {
+        this.questions = questions;
     }
 }
