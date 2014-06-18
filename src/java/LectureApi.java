@@ -1,5 +1,8 @@
 import entities.AccountRole;
 import entities.Lecture;
+import entities.LectureStatus;
+import entities.LectureStatusEnum;
+import entities.Person;
 import entities.TestQuestion;
 import entities.TestQuestionVariant;
 import entities.access.IItemsAccess;
@@ -8,6 +11,7 @@ import entities.util.AccessFactory;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.security.Principal;
 import java.sql.SQLException;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -32,12 +36,37 @@ public class LectureApi extends HttpServlet {
         if(!RoleHelper.IsInRole(request, response, AccountRole.Student)){
             return;
         }
+        
         //TODO
         JSONArray data = new JSONArray();
         try {
+            Person person = null;
+            Principal pr = request.getUserPrincipal();
+            if(pr != null)
+            {
+                person = AccessFactory.PeopleAccess().getByName(pr.getName());
+                if(person == null)
+                {
+                    person = new Person(pr.getName(), pr.getName()+"@Drift.ru", "", AccountRole.Student, null, null);
+                    AccessFactory.PeopleAccess().addOrUpdateItem(person);
+                }
+            }
+            
             for(int i = 1; i < 13; i++) {
-                if(AccessFactory.LecturesAccess().getByNumber(i) == null)
-                    AccessFactory.LecturesAccess().addOrUpdateItem(new Lecture(i, "Лекция " + String.valueOf(i), "Не пройдена"));
+                Lecture lect = AccessFactory.LecturesAccess().getByNumber(i);
+                if(lect == null)
+                {
+                    lect = new Lecture(i, "Лекция " + String.valueOf(i), "Не пройдена");
+                    AccessFactory.LecturesAccess().addOrUpdateItem(lect);
+                }
+                if(person != null && person.GetStatus(lect) == null)
+                {
+                    LectureStatus stat = new LectureStatus();
+                    stat.setPerson(person);
+                    stat.setLecture(lect);
+                    stat.setStatus(LectureStatusEnum.NotTaken);
+                    AccessFactory.LectureStatusAccess().addOrUpdateItem(stat);
+                }
             }
             data.addAll(AccessFactory.LecturesAccess().getAllItems());
         }

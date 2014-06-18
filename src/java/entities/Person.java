@@ -72,6 +72,16 @@ public class Person implements Serializable {
         return accountRole;
     }
     
+    public LectureStatus GetStatus(Lecture lect) {
+        if(lect == null)
+            return null;
+        for(LectureStatus ls: lectures) {
+            if(ls.getLecture() != null && ls.getLecture().getIid() == lect.getIid())
+                return ls;
+        }
+        return null;
+    }
+    
     public Person() {
         
     }

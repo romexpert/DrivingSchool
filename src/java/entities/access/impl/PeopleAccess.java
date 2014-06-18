@@ -10,7 +10,9 @@ import entities.Person;
 import entities.util.HibernateUtil;
 import java.sql.SQLException;
 import java.util.List;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -24,6 +26,18 @@ public class PeopleAccess extends ItemsAccess<Person> {
             Person person = (Person)session.get(Person.class, id);
             person.getStudents().toArray();
             return person;
+        }
+        finally {
+            session.close();
+        }
+    }
+    
+    public Person getByName(String name) throws SQLException {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            Criteria cr = session.createCriteria(Person.class);
+            cr.add(Restrictions.eq("name", name));
+            return (Person)cr.uniqueResult();
         }
         finally {
             session.close();
