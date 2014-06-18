@@ -14,5 +14,6 @@
     <mapping class="entities.StudentGroup"/>
     <mapping class="entities.TestQuestion"/>
     <mapping class="entities.TestQuestionVariant"/>
+    <mapping class="entities.Account"/>
   </session-factory>
 </hibernate-configuration>

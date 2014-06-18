@@ -1,3 +1,4 @@
+import entities.Account;
 import java.io.IOException;
 import java.util.UUID;
 import javax.servlet.Filter;

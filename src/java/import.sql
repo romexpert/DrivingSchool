@@ -2,7 +2,7 @@ INSERT INTO GROUPS (IID, NAME) VALUES (1, 'Group 1');
 INSERT INTO GROUPS (IID, NAME) VALUES (2, 'Group 2');
 INSERT INTO GROUPS (IID, NAME) VALUES (3, 'Group 3');
 
-INSERT INTO PEOPLE (IID, AccountRole, email, name, password_hash, phone, group_id, instructor_id) VALUES (1, 'Admin', 'admin@driftman.ru', 'Admin Andry', 'admin@driftman.ru', '1 2345678', NULL, NULL);
+INSERT INTO PEOPLE (IID, AccountRole, email, name, password_hash, phone, group_id, instructor_id) VALUES (1, 'Admin', 'admin@driftman.ru', 'Admin Andry', 'admin123', '1 2345678', NULL, NULL);
 
 INSERT INTO PEOPLE (IID, AccountRole, email, name, password_hash, phone, group_id, instructor_id) VALUES (2, 'Instructor', 'instructor@driftman.ru', 'Instructor Andry', 'instructor123', '2 2345678', NULL, NULL);
 INSERT INTO PEOPLE (IID, AccountRole, email, name, password_hash, phone, group_id, instructor_id) VALUES (3, 'Instructor', 'instructor2@driftman.ru', 'Instructor 2', 'instructor2123', '3 2345678', NULL, NULL);

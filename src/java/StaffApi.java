@@ -82,7 +82,13 @@ public class StaffApi extends HttpServlet {
             
             String mail = json.get("mail").toString();
             String name = json.get("name").toString();
-            String phone = json.get("phone").toString();
+            String phone = "";
+            try{
+                phone = json.get("phone").toString();
+            }catch(Exception ex){
+                
+            }
+            
             AccountRole role = AccountRole.valueOf(json.get("role").toString());
             String password = json.get("password").toString();
             //TODO: validation

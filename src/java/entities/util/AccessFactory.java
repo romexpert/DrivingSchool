@@ -9,6 +9,7 @@ package entities.util;
 import entities.access.impl.GroupsAccess;
 import entities.access.impl.LecturesAccess;
 import entities.access.impl.PeopleAccess;
+import entities.access.impl.SessionAccess;
 import entities.access.impl.TestsAccess;
 
 /**
@@ -20,6 +21,7 @@ public class AccessFactory {
     private static PeopleAccess peopleAccess = null;
     private static GroupsAccess groupsAccess = null;
     private static TestsAccess testsAccess = null;
+    private static SessionAccess sessionAccess = null;
     private static AccessFactory accessFactory = null;
     
     public static LecturesAccess LecturesAccess() {
@@ -44,5 +46,11 @@ public class AccessFactory {
         if(testsAccess == null)
             testsAccess = new TestsAccess();
         return testsAccess;
+    }
+    
+    public static SessionAccess SessionAccess() {
+        if(sessionAccess == null)
+            sessionAccess = new SessionAccess();
+        return sessionAccess;
     }
 }
