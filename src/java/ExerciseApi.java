@@ -2,6 +2,7 @@ import entities.AccountRole;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.EnumSet;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +18,7 @@ public class ExerciseApi extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        if(!RoleHelper.IsInRole(request, response, AccountRole.Student)){
+        if(!RoleHelper.IsInRole(request, response, EnumSet.of(AccountRole.Student, AccountRole.Instructor))){
             return;
         }
         

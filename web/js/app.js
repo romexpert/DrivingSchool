@@ -31,6 +31,13 @@
                     }
                 )
                 .when(
+                    '/practice/:studentId'
+                    , {
+                        templateUrl: 'partials/practice.html'
+                        , controller: 'PracticeCtrl'
+                    }
+                )
+                .when(
                     '/adminHome'
                     , {
                         templateUrl: 'partials/adminHome.html'

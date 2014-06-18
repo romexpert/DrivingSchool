@@ -70,6 +70,35 @@
     );
     
     schoolControllers.controller(
+        'PracticeCtrl'
+        , [
+            '$scope'
+            , '$window'
+            , '$routeParams'
+            , 'staff'
+            , 'exercises'
+            , function($scope, $window, $routeParams, staff, exercises){
+                staff.query({role: $window.driftMan.roles.Student}, function(data){
+                    angular.forEach(data, function(value){
+                        if(value.id == $routeParams.studentId)
+                            $scope.student = value;
+                    });
+                    $scope.exercises = exercises.query();
+                    $scope.setPractice = function(practice){
+                        exercises.save({
+                            studentId: $routeParams.studentId
+                            , exerciseNumber: practice.number
+                            }, function(){
+                                $scope.exercises = exercises.query();
+                            }
+                        );
+                    }
+                });
+            }
+        ]
+    );
+    
+    schoolControllers.controller(
         'AdminHomeCtrl'
         , [
             '$scope'
@@ -256,7 +285,7 @@
                 $scope.credentials = credentials.nextCredentials($window.localStorage.getItem('credIndex'));
                 
                 $scope.changeCredentials = function(e){
-                    if(e.shiftKey && e.keyCode === 38){
+                    if(e.shiftKey && e.keyCode === 13){
                         e.preventDefault();
                         $scope.credentials = credentials.nextCredentials();
                     }

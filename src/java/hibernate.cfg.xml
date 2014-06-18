@@ -11,6 +11,8 @@
     <property name="hibernate.show_sql">true</property>
     <mapping class="entities.Lecture"/>
     <mapping class="entities.Person"/>
-    <mapping class="entities.Group"/>
+    <mapping class="entities.StudentGroup"/>
+    <mapping class="entities.TestQuestion"/>
+    <mapping class="entities.TestQuestionVariant"/>
   </session-factory>
 </hibernate-configuration>
