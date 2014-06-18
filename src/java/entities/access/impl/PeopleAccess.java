@@ -37,6 +37,11 @@ public class PeopleAccess extends ItemsAccess<Person> {
         try {
             Criteria cr = session.createCriteria(Person.class);
             cr.add(Restrictions.eq("name", name));
+    public Person getByEmail(String email) throws SQLException {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            Criteria cr = session.createCriteria(Person.class);
+            cr.add(Restrictions.eq("email", email));
             return (Person)cr.uniqueResult();
         }
         finally {

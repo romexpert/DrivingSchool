@@ -1,3 +1,4 @@
+import entities.Account;
 import entities.AccountRole;
 import java.io.IOException;
 import java.util.EnumSet;
