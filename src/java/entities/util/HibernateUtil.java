@@ -8,6 +8,8 @@ package entities.util;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.service.ServiceRegistry;
+import org.hibernate.service.ServiceRegistryBuilder;
 
 /**
  *
@@ -15,9 +17,15 @@ import org.hibernate.cfg.Configuration;
  */
 public class HibernateUtil {
     private static SessionFactory sessionFactory = null;
+    private static ServiceRegistry serviceRegistry = null;
     static {
         try{
-            sessionFactory = new Configuration().configure().buildSessionFactory();
+            Configuration config = new Configuration();
+            config.configure();
+            ServiceRegistryBuilder builder = new ServiceRegistryBuilder();
+            builder.applySettings(config.getProperties());
+            serviceRegistry = builder.buildServiceRegistry();
+            sessionFactory = config.buildSessionFactory(serviceRegistry);
         }
         catch(Exception ex) {
             ex.printStackTrace();

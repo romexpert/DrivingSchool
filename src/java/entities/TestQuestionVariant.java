@@ -32,7 +32,7 @@ public class TestQuestionVariant implements Serializable {
     @Column(name = "variant_order")
     private int number;
     
-    @Column(name = "varint_text")
+    @Column(name = "variant_text", length = 8000)
     private String text;
     
     @ManyToOne
