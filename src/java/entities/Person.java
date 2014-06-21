@@ -47,6 +47,9 @@ public class Person implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "person")
     private Set<LectureStatus> lectures = new HashSet<>();
     
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "student")
+    private Set<PracticeStatus> practices = new HashSet<>();
+    
     @ManyToOne
     @JoinColumn(name = "instructor_id")
     private Person instructor;
@@ -194,5 +197,26 @@ public class Person implements Serializable {
      */
     public Set<LectureStatus> getLectures() {
         return lectures;
+    }
+
+    /**
+     * @param lectures the lectures to set
+     */
+    public void setLectures(Set<LectureStatus> lectures) {
+        this.lectures = lectures;
+    }
+
+    /**
+     * @return the practices
+     */
+    public Set<PracticeStatus> getPractices() {
+        return practices;
+    }
+
+    /**
+     * @param practices the practices to set
+     */
+    public void setPractices(Set<PracticeStatus> practices) {
+        this.practices = practices;
     }
 }

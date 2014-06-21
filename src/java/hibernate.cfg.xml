@@ -16,5 +16,6 @@
     <mapping class="entities.TestQuestionVariant"/>
     <mapping class="entities.LectureStatus"/>
     <mapping class="entities.Account"/>
+    <mapping class="entities.PracticeStatus"/>
   </session-factory>
 </hibernate-configuration>

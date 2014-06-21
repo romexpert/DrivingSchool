@@ -10,6 +10,7 @@ import entities.access.impl.GroupsAccess;
 import entities.access.impl.LectureStatusAccess;
 import entities.access.impl.LecturesAccess;
 import entities.access.impl.PeopleAccess;
+import entities.access.impl.PracticeStatusAccess;
 import entities.access.impl.SessionAccess;
 import entities.access.impl.TestsAccess;
 
@@ -24,6 +25,7 @@ public class AccessFactory {
     private static TestsAccess testsAccess = null;
     private static SessionAccess sessionAccess = null;
     private static LectureStatusAccess lectureStatusAccess = null;
+    private static PracticeStatusAccess practiceStatusAccess = null;
     private static AccessFactory accessFactory = null;
     
     public static LecturesAccess LecturesAccess() {
@@ -55,10 +57,16 @@ public class AccessFactory {
             lectureStatusAccess = new LectureStatusAccess();
         return lectureStatusAccess;
     }
+    
+    public static PracticeStatusAccess PracticeStatusAccess() {
+        if(practiceStatusAccess == null)
+            practiceStatusAccess = new PracticeStatusAccess();
+        return practiceStatusAccess;
+    }
+    
     public static SessionAccess SessionAccess() {
         if(sessionAccess == null)
             sessionAccess = new SessionAccess();
         return sessionAccess;
-
     }
 }

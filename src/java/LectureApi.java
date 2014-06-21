@@ -3,11 +3,14 @@ import entities.Lecture;
 import entities.LectureStatus;
 import entities.LectureStatusEnum;
 import entities.Person;
+import entities.PracticeStatus;
 import entities.TestQuestion;
 import entities.TestQuestionVariant;
 import entities.access.IItemsAccess;
 import entities.access.impl.LecturesAccess;
+import entities.access.impl.PracticeStatusAccess;
 import entities.util.AccessFactory;
+import entities.util.HibernateUtil;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -22,7 +25,6 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.json.simple.*;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 /**
  *
