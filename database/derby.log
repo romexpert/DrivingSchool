@@ -12,3 +12,8 @@ os.arch=amd64
 os.version=6.1
 derby.system.home=D:\Study\DrivingSchool\database
 Запущен загрузчик классов базы данных - derby.database.classpath=''
+----------------------------------------------------------------
+Thu Jun 19 03:15:06 MSK 2014: Shutting down Derby engine
+----------------------------------------------------------------
+Thu Jun 19 03:15:06 MSK 2014:
+Завершается работа экземпляра a816c00e-0146-b134-cddc-0000138c1775
