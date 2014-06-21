@@ -38,6 +38,7 @@
                     <th>Имя</th>
                     <th>Телефон</th>
                     <th>Должность</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -45,6 +46,11 @@
                     <td>{{employee.name}}</td>
                     <td>{{employee.phone}}</td>
                     <td>{{getPositionName(employee.role)}}</td>
+                    <td>
+                        <button class="btn btn-danger" ng-click="deletePerson(employee)" ng-disabled="employee.id == currentUser.id">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </button>
+                    </td>
                 </tr>
             </tbody>
         </table>

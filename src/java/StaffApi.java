@@ -77,6 +77,10 @@ public class StaffApi extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        if(!RoleHelper.IsInRole(request, response, AccountRole.Admin)){
+            return;
+        }
+        
         try {
             JSONObject json = (JSONObject)JSONValue.parse(request.getReader());
             
@@ -123,6 +127,22 @@ public class StaffApi extends HttpServlet {
             AccessFactory.PeopleAccess().addOrUpdateItem(person);
         } catch(Exception ex) {
             throw new IOException("Error parsing JSON request string" + ex.toString());
+        }
+    }
+    
+    @Override
+    protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if(!RoleHelper.IsInRole(request, response, AccountRole.Admin)){
+            return;
+        }
+        
+        JSONObject json = (JSONObject)JSONValue.parse(request.getReader());
+        int id = Integer.parseInt(request.getParameter("id"));
+        
+        try{
+            AccessFactory.PeopleAccess().removeItem(AccessFactory.PeopleAccess().getItem(id));
+        } catch(Exception ex) {
+            throw new ServletException("Error during deleting");
         }
     }
 

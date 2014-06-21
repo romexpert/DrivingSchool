@@ -19,6 +19,7 @@
                     <th>Имя</th>
                     <th>Телефон</th>
                     <th>Инструктор</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -26,6 +27,11 @@
                     <td>{{student.name}}</td>
                     <td>{{student.phone}}</td>
                     <td>{{getInstructorsName(student.instructorId)}}</td>
+                    <td>
+                        <button class="btn btn-danger" ng-click="deleteStudent(student)">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </button>
+                    </td>
                 </tr>
             </tbody>
         </table>

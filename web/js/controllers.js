@@ -134,6 +134,15 @@
                 $scope.addGroup = function(){
                     $location.path('/addGroup');
                 };
+                
+                $scope.deletePerson = function(person){
+                    if(!$window.confirm('Вы уверены, что хотите удалить работника "' + person.name + '"?'))
+                        return;
+                    
+                    staff.delete({id: person.id}, function(){
+                        $scope.staff = staff.query();
+                    });
+                }
             }
         ]
     );
@@ -204,7 +213,11 @@
                     });
                 });
                 $scope.instructors = staff.query({role:$window.driftMan.roles.Instructor});
-                $scope.students = staff.query({role:$window.driftMan.roles.Student, groupId:$routeParams.groupId});
+                
+                var resfreshStudents = function(){
+                    $scope.students = staff.query({role:$window.driftMan.roles.Student, groupId:$routeParams.groupId});
+                }
+                resfreshStudents();
                 
                 $scope.getInstructorsName = function(instructorId){
                     return getPersonName(instructorId, $scope.instructors);
@@ -213,6 +226,15 @@
                 $scope.addStudent = function(){
                     $location.path('/addStudent/' + $routeParams.groupId)
                 };
+                
+                $scope.deleteStudent = function(person){
+                    if(!$window.confirm('Вы уверены, что хотите удалить студента "' + person.name + '"?'))
+                        return;
+                    
+                    staff.delete({id: person.id}, function(){
+                        resfreshStudents();
+                    });
+                }
             }
         ]
     );
