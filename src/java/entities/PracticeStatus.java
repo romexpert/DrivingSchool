@@ -7,6 +7,7 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -39,6 +40,8 @@ public class PracticeStatus implements Serializable{
     @Column(name = "is_completed", nullable = false)
     private boolean completed;
     
+    private Date date;
+    
     public PracticeStatus() {
         this.completed = false;
     }
@@ -64,13 +67,21 @@ public class PracticeStatus implements Serializable{
         return practiceNumber;
     }
 
+    public Date getDate(){
+        return date;
+    }
+    
+    public void setDate(Date date){
+        this.date = date;
+    }
+
     /**
      * @param practiceNumber the practiceNumber to set
      */
     public void setPracticeNumber(int practiceNumber) {
         this.practiceNumber = practiceNumber;
     }
-
+    
     /**
      * @return the student
      */
@@ -97,5 +108,10 @@ public class PracticeStatus implements Serializable{
      */
     public void setCompleted(boolean completed) {
         this.completed = completed;
+    }
+    
+    @Override
+    public String toString(){
+        return String.format("{\"id\": %s, \"number\": %s, \"studentId\": %s, \"isCompleted\": %s, \"datetime\": \"%s\"}", getId(), getPracticeNumber(), getStudent().getId(), isCompleted(), date == null ? "" : date.toString());
     }
 }

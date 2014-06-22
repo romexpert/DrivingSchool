@@ -43,13 +43,13 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="exercise in exercises">
+                <tr ng-repeat="exercise in exercises | orderBy:'number'">
                     <td>{{exercise.number}}</td>
                     <td>
                         {{exercise.datetime | date:'d.MM.yyyy HH:mm'}}
                     </td>
                     <td>
-                        <span class="glyphicon" ng-class="{'glyphicon-ok': exercise.status === 'Пройдено', 'glyphicon-remove': exercise.status !== 'Пройдено'}"></span> {{exercise.status}}
+                        <span class="glyphicon" ng-class="{'glyphicon-ok green': exercise.isCompleted, 'glyphicon-remove red': !exercise.isCompleted}"></span>
                     </td>
                 </tr>
             </tbody>

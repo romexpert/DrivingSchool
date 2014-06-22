@@ -46,11 +46,12 @@
         'StudentHomeCtrl'
         , [
             '$scope'
+            , 'currentUser'
             , 'lectures'
             , 'exercises'
-            , function($scope, lectures, exercises) {
+            , function($scope, currentUser, lectures, exercises) {
                 $scope.lectures = lectures.query();
-                $scope.exercises = exercises.query();
+                $scope.exercises = exercises.query({studentId: currentUser.id});
             }
         ]
     );
@@ -83,13 +84,19 @@
                         if(value.id == $routeParams.studentId)
                             $scope.student = value;
                     });
-                    $scope.exercises = exercises.query();
+                    
+                    var updateExercises = function(){
+                        $scope.exercises = exercises.query({studentId: $routeParams.studentId});
+                    }
+                    updateExercises();
+                    
                     $scope.setPractice = function(practice){
                         exercises.save({
-                            studentId: $routeParams.studentId
-                            , exerciseNumber: practice.number
-                            }, function(){
-                                $scope.exercises = exercises.query();
+                                id: practice.id
+                            }
+                            , null
+                            , function(){
+                                updateExercises();
                             }
                         );
                     }

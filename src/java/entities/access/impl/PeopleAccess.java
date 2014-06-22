@@ -25,6 +25,7 @@ public class PeopleAccess extends ItemsAccess<Person> {
         try {
             Person person = (Person)session.get(Person.class, id);
             person.getStudents().toArray();
+            person.getPractices().toArray();
             return person;
         }
         finally {

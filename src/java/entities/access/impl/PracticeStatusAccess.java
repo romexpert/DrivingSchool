@@ -22,7 +22,7 @@ public class PracticeStatusAccess extends ItemsAccess<PracticeStatus>{
     public PracticeStatus getItem(int id) throws SQLException {
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
-            return (PracticeStatus)session.load(PracticeStatus.class, id);
+            return (PracticeStatus)session.get(PracticeStatus.class, id);
         }
         finally {
             session.close();

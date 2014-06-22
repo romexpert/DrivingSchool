@@ -9,10 +9,10 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="exercise in exercises | orderBy:'name'">
+                <tr ng-repeat="exercise in exercises | orderBy:'number'">
                     <td>{{exercise.number}}</td>
-                    <td ng-switch="exercise.status">
-                        <span ng-switch-when="Пройдено">{{exercise.status}}</span>
+                    <td ng-switch="exercise.isCompleted">
+                        <span ng-switch-when="true">Пройдена</span>
                         <button ng-switch-default class="btn btn-success btn-block" ng-click="setPractice(exercise)">Выставить</button>
                     </td>
                 </tr>
