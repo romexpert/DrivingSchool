@@ -2,7 +2,6 @@
 <ul class="nav nav-tabs">
     <li class="active"><a href="" data-target="#theory" data-toggle="tab">Теория</a></li>
     <li><a href="" data-target="#exercises" data-toggle="tab">Практика</a></li>
-    <li><a href="" data-target="#exam" data-toggle="tab">Экзамен</a></li>
 </ul>
 
 <!-- Tab panes -->
@@ -18,7 +17,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="lecture in lectures">
+                <tr ng-repeat="lecture in lectures | orderBy:'number'">
                     <td>{{lecture.number}}</td>
                     <td>
                         <a ng-href="#/lecture{{lecture.number}}">
@@ -26,7 +25,9 @@
                         </a>
                     </td>
                     <td>
-                        <span class="glyphicon" ng-class="{'glyphicon-ok': lecture.status === 'Пройдена', 'glyphicon-remove': lecture.status !== 'Пройдена'}"></span> {{lecture.status}}
+                        <span class="glyphicon" ng-class="{'glyphicon-ok green': lecture.status === 'Passed', 'glyphicon-remove red': lecture.status === 'Failed'}"></span>
+                        <span ng-if="lecture.status === 'Passed'">Пройдена</span>
+                        <a href="#/lectureTest/{{lecture.number}}" ng-if="lecture.status !== 'Passed'">Пройти тест <span ng-if="lecture.status === 'Failed'">снова</span></a>
                     </td>
                 </tr>
             </tbody>
@@ -38,24 +39,21 @@
             <thead>
                 <tr>
                     <th>№</th>
-                    <th>Дата</th>
                     <th>Статус</th>
+                    <th>Дата</th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="exercise in exercises | orderBy:'number'">
                     <td>{{exercise.number}}</td>
                     <td>
-                        {{exercise.datetime | date:'d.MM.yyyy HH:mm'}}
+                        <span class="glyphicon" ng-class="{'glyphicon-ok green': exercise.isCompleted, 'glyphicon-remove red': !exercise.isCompleted}"></span>
                     </td>
                     <td>
-                        <span class="glyphicon" ng-class="{'glyphicon-ok green': exercise.isCompleted, 'glyphicon-remove red': !exercise.isCompleted}"></span>
+                        {{exercise.datetime | date:'d.MM.yyyy HH:mm'}}
                     </td>
                 </tr>
             </tbody>
         </table>
-    </div>
-    <div class="tab-pane fade" id="exam">
-        <h2>Экзамен</h2>
     </div>
 </div>

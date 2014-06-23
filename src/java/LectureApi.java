@@ -1,3 +1,4 @@
+import entities.Account;
 import entities.AccountRole;
 import entities.Lecture;
 import entities.LectureStatus;
@@ -42,27 +43,16 @@ public class LectureApi extends HttpServlet {
         //TODO
         JSONArray data = new JSONArray();
         try {
-            Person person = null;
-            Principal pr = request.getUserPrincipal();
-            if(pr != null)
-            {
-                person = AccessFactory.PeopleAccess().getByName(pr.getName());
-                if(person == null)
-                {
-                    person = new Person(pr.getName(), pr.getName()+"@Drift.ru", "", AccountRole.Student, null, null);
-                    AccessFactory.PeopleAccess().addOrUpdateItem(person);
-                }
-            }
+            Person person = new Person();
+            person.setId(((Account)request.getAttribute("account")).getId());
             
             for(int i = 1; i < 13; i++) {
                 Lecture lect = AccessFactory.LecturesAccess().getByNumber(i);
                 if(lect == null)
                 {
-                    lect = new Lecture(i, "Лекция " + String.valueOf(i), "Не пройдена");
+                    lect = new Lecture(i, "Лекция " + String.valueOf(i));
                     AccessFactory.LecturesAccess().addOrUpdateItem(lect);
-                }
-                if(person != null && person.GetStatus(lect) == null)
-                {
+                    
                     LectureStatus stat = new LectureStatus();
                     stat.setPerson(person);
                     stat.setLecture(lect);
@@ -70,7 +60,9 @@ public class LectureApi extends HttpServlet {
                     AccessFactory.LectureStatusAccess().addOrUpdateItem(stat);
                 }
             }
-            data.addAll(AccessFactory.LecturesAccess().getAllItems());
+            
+            person = AccessFactory.PeopleAccess().getItem(person.getId());
+            data.addAll(person.getLectures());
         }
         catch(SQLException ex) {
             ex.printStackTrace();

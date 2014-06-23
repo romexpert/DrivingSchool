@@ -28,7 +28,6 @@ public class Lecture implements Serializable {
     
     private int number;
     private String name;
-    private String status;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "lecture")
     private Set<TestQuestion> questions = new HashSet<TestQuestion>();
@@ -39,10 +38,9 @@ public class Lecture implements Serializable {
     public Lecture() {
     }
     
-    public Lecture(int number, String name, String status){
+    public Lecture(int number, String name){
         this.number = number;
         this.name = name;
-        this.status = status;
     }
     
     
@@ -54,14 +52,10 @@ public class Lecture implements Serializable {
         return name;
     }
     
-    public String getStatus(){
-        return status;
-    }
-    
     
     @Override
     public String toString(){
-        return String.format("{\"number\": %s, \"name\": \"%s\", \"status\": \"%s\"}", getNumber(), getName(), getStatus());
+        return String.format("{\"number\": %s, \"name\": \"%s\"}", getNumber(), getName());
     }
 
     /**
@@ -90,13 +84,6 @@ public class Lecture implements Serializable {
      */
     public void setName(String name) {
         this.name = name;
-    }
-
-    /**
-     * @param status the status to set
-     */
-    public void setStatus(String status) {
-        this.status = status;
     }
 
     /**

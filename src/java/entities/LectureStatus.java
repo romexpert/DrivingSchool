@@ -102,4 +102,9 @@ public class LectureStatus implements Serializable {
     public void setStatus(LectureStatusEnum status) {
         this.status = status;
     }
+    
+    @Override
+    public String toString(){
+        return String.format("{\"id\": %s, \"number\": %s, \"name\": \"%s\", \"status\": \"%s\"}", getIid(), getLecture().getNumber(), getLecture().getName(), getStatus());
+    }
 }
