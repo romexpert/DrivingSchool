@@ -97,4 +97,12 @@ public class Account implements Serializable {
         return account;
     }
     
+    
+    public static Account getTest(){
+        Account account = new Account();
+        
+        account._role = AccountRole.Admin;
+        
+        return account;
+    }
 }
