@@ -274,7 +274,7 @@ public class RoleHelperTest {
 
         @Override
         public Object getAttribute(String name) {
-            return Account.getTest();
+            return Account.getTest(AccountRole.Admin, "admin");
         }
 
         @Override

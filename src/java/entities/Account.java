@@ -98,10 +98,11 @@ public class Account implements Serializable {
     }
     
     
-    public static Account getTest(){
+    public static Account getTest(AccountRole role, String name){
         Account account = new Account();
         
-        account._role = AccountRole.Admin;
+        account._name = name;
+        account._role = role;
         
         return account;
     }
