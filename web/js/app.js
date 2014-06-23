@@ -24,6 +24,12 @@
                     }
                 )
                 .when(
+                    '/lectureTest/:number'
+                    , {
+                        templateUrl: 'partials/lectureTest.html'
+                    }
+                )
+                .when(
                     '/instructorHome'
                     , {
                         templateUrl: 'partials/instructorHome.html'

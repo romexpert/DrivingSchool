@@ -27,7 +27,7 @@
                     <td>
                         <span class="glyphicon" ng-class="{'glyphicon-ok green': lecture.status === 'Passed', 'glyphicon-remove red': lecture.status === 'Failed'}"></span>
                         <span ng-if="lecture.status === 'Passed'">Пройдена</span>
-                        <a href="#/lectureTest/{{lecture.number}}" ng-if="lecture.status !== 'Passed'">Пройти тест <span ng-if="lecture.status === 'Failed'">снова</span></a>
+                        <a href="#/lectureTest/{{lecture.number}}?id={{lecture.id}}" ng-if="lecture.status !== 'Passed'">Пройти тест <span ng-if="lecture.status === 'Failed'">снова</span></a>
                     </td>
                 </tr>
             </tbody>
@@ -47,7 +47,7 @@
                 <tr ng-repeat="exercise in exercises | orderBy:'number'">
                     <td>{{exercise.number}}</td>
                     <td>
-                        <span class="glyphicon" ng-class="{'glyphicon-ok green': exercise.isCompleted, 'glyphicon-remove red': !exercise.isCompleted}"></span>
+                        <span class="glyphicon" ng-class="{'glyphicon-ok green': exercise.isCompleted, 'glyphicon-remove': !exercise.isCompleted}"></span>
                     </td>
                     <td>
                         {{exercise.datetime | date:'d.MM.yyyy HH:mm'}}

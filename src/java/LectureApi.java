@@ -4,20 +4,12 @@ import entities.Lecture;
 import entities.LectureStatus;
 import entities.LectureStatusEnum;
 import entities.Person;
-import entities.PracticeStatus;
 import entities.TestQuestion;
 import entities.TestQuestionVariant;
-import entities.access.IItemsAccess;
-import entities.access.impl.LecturesAccess;
-import entities.access.impl.PracticeStatusAccess;
 import entities.util.AccessFactory;
-import entities.util.HibernateUtil;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.security.Principal;
 import java.sql.SQLException;
-import java.util.List;
+import java.util.Set;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -52,16 +44,24 @@ public class LectureApi extends HttpServlet {
                 {
                     lect = new Lecture(i, "Лекция " + String.valueOf(i));
                     AccessFactory.LecturesAccess().addOrUpdateItem(lect);
-                    
-                    LectureStatus stat = new LectureStatus();
-                    stat.setPerson(person);
-                    stat.setLecture(lect);
-                    stat.setStatus(LectureStatusEnum.NotTaken);
-                    AccessFactory.LectureStatusAccess().addOrUpdateItem(stat);
                 }
             }
             
             person = AccessFactory.PeopleAccess().getItem(person.getId());
+            Set<LectureStatus> personLectures = person.getLectures();
+            if(personLectures.isEmpty()){
+                for(Lecture lecture : AccessFactory.LecturesAccess().getAllItems()){
+                    
+                    LectureStatus stat = new LectureStatus();
+                    stat.setPerson(person);
+                    stat.setLecture(lecture);
+                    stat.setStatus(LectureStatusEnum.NotTaken);
+                    AccessFactory.LectureStatusAccess().addOrUpdateItem(stat);
+                }
+                
+                person = AccessFactory.PeopleAccess().getItem(person.getId());
+            }
+            
             data.addAll(person.getLectures());
         }
         catch(SQLException ex) {
