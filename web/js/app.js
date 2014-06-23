@@ -27,6 +27,7 @@
                     '/lectureTest/:number'
                     , {
                         templateUrl: 'partials/lectureTest.html'
+                        , controller: 'LectureTestCtrl'
                     }
                 )
                 .when(

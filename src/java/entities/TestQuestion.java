@@ -152,4 +152,11 @@ public class TestQuestion implements Serializable {
     public void setComment(String comment) {
         this.comment = comment;
     }
+    
+    @Override
+    public String toString(){
+        return String.format("{\"id\": %s, \"lectureNumber\": %s, \"question\": \"%s\", \"imageUrl\": \"%s\", \"options\": %s}", getId(), getLecture().getNumber(),
+                getQuestion().replace("\n", " "),
+                getImage(), getVariants());
+    }
 }

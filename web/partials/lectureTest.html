@@ -1,1 +1,20 @@
-тест лекции
+<h2>Тест для прохождения лекции {{lectureNumber}}</h2>
+
+<div class="panel panel-default">
+    <div class="panel-heading"><span ng-if="questions.length">{{currentQuestionIndex + 1}} / {{questions.length}}</span></div>
+    <div class="panel-body">
+        <h3>{{currentQuestion.question}}</h3>
+        <br />
+        <img ng-if="currentQuestion.imageUrl" ng-src="images/{{currentQuestion.imageUrl}}"></img>
+
+        <div class="radio" ng-repeat="option in currentQuestion.options">
+            <label>
+                <input type="radio" name="optionsRadios" ng-click="activateNext(option)" ng-value="option.optionsNumber" />
+                {{option.optionsText}}
+            </label>
+        </div>
+
+        <br />
+        <button class="btn btn-success" ng-disabled="isNextDisabled" ng-if="currentQuestion" ng-click="nextQuestion()">Ответить</button>
+    </div>
+</div>

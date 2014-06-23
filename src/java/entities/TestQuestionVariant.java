@@ -98,4 +98,9 @@ public class TestQuestionVariant implements Serializable {
     public void setQuestion(TestQuestion question) {
         this.question = question;
     }
+    
+    @Override
+    public String toString(){
+        return String.format("{\"id\": %s, \"optionsNumber\": %s, \"optionsText\": \"%s\"}", getId(), getNumber(), getText());
+    }
 }

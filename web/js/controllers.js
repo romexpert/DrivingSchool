@@ -57,6 +57,45 @@
     );
     
     schoolControllers.controller(
+        'LectureTestCtrl'
+        , [
+            '$scope'
+            , '$routeParams'
+            , '$location'
+            , 'lectures'
+            , function($scope, $routeParams, $location, lectures){
+                $scope.lectureNumber = $routeParams.number;
+                $scope.currentQuestionIndex = 0;
+                $scope.isNextDisabled = true;
+                $scope.questions = lectures.query({number: $scope.lectureNumber}, function(data){
+                    if(data.length)
+                        $scope.currentQuestion = $scope.questions[$scope.currentQuestionIndex];
+                });
+                
+                $scope.activateNext = function(option){
+                    $scope.currentQuestion.answer = option.optionsNumber;
+                    $scope.isNextDisabled = false;
+                };
+                $scope.nextQuestion = function(){
+                    $scope.isNextDisabled = true;
+                    if($scope.currentQuestionIndex + 1 < $scope.questions.length)
+                        $scope.currentQuestion = $scope.questions[++$scope.currentQuestionIndex];
+                    else{
+                        var result = $.map($scope.questions, function(value){
+                            return { id: value.id, answer: value.answer};
+                        });
+                        
+                        lectures.save({lectureNumber: $scope.lectureNumber}, result, function(data){
+                            alert(data.message);
+                            $location.path('/studentHome').replace();
+                        })
+                    }
+                };
+            }
+        ]
+    );
+    
+    schoolControllers.controller(
         'InstructorHomeCtrl'
         , [
             '$scope'

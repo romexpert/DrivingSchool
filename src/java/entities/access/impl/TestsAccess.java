@@ -33,7 +33,13 @@ public class TestsAccess extends ItemsAccess<TestQuestion> {
     public List<TestQuestion> getAllItems() throws SQLException {
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
-            return session.createCriteria(TestQuestion.class).list();
+            
+            List<TestQuestion> questions = session.createCriteria(TestQuestion.class).list();
+            for(TestQuestion q : questions){
+                q.getVariants().toArray();
+            }
+            
+            return questions;
         }
         finally {
             session.close();

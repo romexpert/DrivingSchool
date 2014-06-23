@@ -136,7 +136,6 @@ public class StaffApi extends HttpServlet {
             return;
         }
         
-        JSONObject json = (JSONObject)JSONValue.parse(request.getReader());
         int id = Integer.parseInt(request.getParameter("id"));
         
         try{

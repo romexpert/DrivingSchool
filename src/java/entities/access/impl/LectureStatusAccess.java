@@ -22,7 +22,7 @@ public class LectureStatusAccess extends ItemsAccess<LectureStatus>{
     public LectureStatus getItem(int id) throws SQLException {
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
-            return (LectureStatus)session.load(LectureStatus.class, id);
+            return (LectureStatus)session.get(LectureStatus.class, id);
         }
         finally {
             session.close();
